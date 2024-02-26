@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7nHgO9BM7K9cuC+eIV/YaBXZDqNJ0CwcchuI7U0ypD6xqMtbZdBKlYPGc93iA6cOBEMozANTBI6T+H7rnhNP+g==",
+  "dgSpecHash": "OQmiYmIkGErVmbHdLNAzTb/2z/xFGh8hOmT6J+uRM52ZGtIrLnbgj0Sq5JNiqc7f2sfAtlrcTkYquVFivZ3NBQ==",
   "success": true,
   "projectFilePath": "C:\\Angéla\\Allatmenhely\\backend\\backend.csproj",
   "expectedPackageFiles": [
@@ -20,6 +20,10 @@
     "C:\\Users\\nemet\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\nemet\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\nemet\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\nemet\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.3.1\\microsoft.identitymodel.abstractions.7.3.1.nupkg.sha512",
+    "C:\\Users\\nemet\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.3.1\\microsoft.identitymodel.jsonwebtokens.7.3.1.nupkg.sha512",
+    "C:\\Users\\nemet\\.nuget\\packages\\microsoft.identitymodel.logging\\7.3.1\\microsoft.identitymodel.logging.7.3.1.nupkg.sha512",
+    "C:\\Users\\nemet\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.3.1\\microsoft.identitymodel.tokens.7.3.1.nupkg.sha512",
     "C:\\Users\\nemet\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\nemet\\.nuget\\packages\\mysqlconnector\\2.0.0\\mysqlconnector.2.0.0.nupkg.sha512",
     "C:\\Users\\nemet\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\6.0.0\\pomelo.entityframeworkcore.mysql.6.0.0.nupkg.sha512",
@@ -29,6 +33,7 @@
     "C:\\Users\\nemet\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
     "C:\\Users\\nemet\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\nemet\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
+    "C:\\Users\\nemet\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.3.1\\system.identitymodel.tokens.jwt.7.3.1.nupkg.sha512",
     "C:\\Users\\nemet\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
