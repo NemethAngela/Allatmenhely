@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Angéla\\Allattmenhely\\backend\\backend.csproj": {}
+    "C:\\Angéla\\Allatmenhely\\backend\\backend.csproj": {}
   },
   "projects": {
-    "C:\\Angéla\\Allattmenhely\\backend\\backend.csproj": {
+    "C:\\Angéla\\Allatmenhely\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Angéla\\Allattmenhely\\backend\\backend.csproj",
+        "projectUniqueName": "C:\\Angéla\\Allatmenhely\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "C:\\Angéla\\Allattmenhely\\backend\\backend.csproj",
+        "projectPath": "C:\\Angéla\\Allatmenhely\\backend\\backend.csproj",
         "packagesPath": "C:\\Users\\nemet\\.nuget\\packages\\",
-        "outputPath": "C:\\Angéla\\Allattmenhely\\backend\\obj\\",
+        "outputPath": "C:\\Angéla\\Allatmenhely\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nemet\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
