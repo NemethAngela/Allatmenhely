@@ -1,6 +1,11 @@
+using backend.Controllers.RequestModels;
+using backend.Controllers.ResponseModels;
+using backend.Helpers;
 using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
+using backend.Helpers;
 
 namespace backend.Controllers
 {
@@ -20,6 +25,38 @@ namespace backend.Controllers
         }
 
         #region Admin
+
+        [HttpPost]
+        [Route("Login")]
+        public async Task<ActionResult<LoginResponseModel>> Login([FromBody] LoginRequestModel loginRequest)
+        {
+            var admin = _context.Admins.FirstOrDefault(x => x.Email == loginRequest.Email);
+
+            if (admin == null)
+            {
+                return new LoginResponseModel { IsError = true, ErrorMessage = "Admin nem található" };
+            }
+
+            var valid = HashHelper.VerifyMD5Hash(loginRequest.Password, admin.PasswordSalt, admin.PasswordHash);
+
+            if (!valid)
+            {
+                return new LoginResponseModel { IsError = true, ErrorMessage = "Admin email vagy jelszó nem megfelelõ" };
+            }
+
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = false,
+                SameSite = SameSiteMode.None,
+                MaxAge = TimeSpan.FromDays(1)
+            };
+
+            var token = JWTHelper.GenerateToken(admin);
+            Response.Cookies.Append("jwtToken", token, cookieOptions);
+
+            return Ok(new LoginResponseModel { adminUser = admin });
+        }
 
         #endregion
 

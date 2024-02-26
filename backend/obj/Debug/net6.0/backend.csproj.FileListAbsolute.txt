@@ -69,3 +69,8 @@ C:\Angéla\Allatmenhely\backend\bin\Debug\net6.0\MySqlConnector.dll
 C:\Angéla\Allatmenhely\backend\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Angéla\Allatmenhely\backend\bin\Debug\net6.0\Humanizer.dll
 C:\Angéla\Allatmenhely\backend\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Angéla\Allatmenhely\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Angéla\Allatmenhely\backend\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Angéla\Allatmenhely\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Angéla\Allatmenhely\backend\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Angéla\Allatmenhely\backend\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
