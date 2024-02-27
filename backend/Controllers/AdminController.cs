@@ -1,6 +1,6 @@
-using backend.Controllers.RequestModels;
-using backend.Controllers.ResponseModels;
 using backend.Helpers;
+using backend.Models.RequestModels;
+using backend.Models.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers

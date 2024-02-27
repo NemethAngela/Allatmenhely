@@ -1,4 +1,4 @@
-﻿namespace backend.Controllers.RequestModels
+﻿namespace backend.Models.RequestModels
 {
     public class LoginRequestModel
     {

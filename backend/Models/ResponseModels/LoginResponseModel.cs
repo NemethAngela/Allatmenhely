@@ -1,6 +1,6 @@
 ﻿using backend.Models;
 
-namespace backend.Controllers.ResponseModels
+namespace backend.Models.ResponseModels
 {
     public class LoginResponseModel : BaseResponseModel
     {

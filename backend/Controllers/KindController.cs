@@ -1,5 +1,5 @@
-using backend.Controllers.ResponseModels;
 using backend.Models;
+using backend.Models.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +21,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllKinds")]
+        [Route("Kinds/GetAllKinds")]
         public async Task<ActionResult<KindsResponseModel>> GetAllKinds()
         {
             try
@@ -33,19 +33,19 @@ namespace backend.Controllers
 
                 if (response.Kinds == null || !response.Kinds.Any())
                 {
-                    return NotFound(new KindsResponseModel { IsError = true, ErrorMessage = $"Még nincs egyetlen fajta sem" });
+                    return NotFound(new AnimalsResponseModel { IsError = true, ErrorMessage = $"Még nincs egyetlen fajta sem" });
                 }
 
                 return Ok(response);
             }
             catch (Exception ex)
             {
-                return BadRequest(new KindsResponseModel { IsError = true, ErrorMessage = $"Hiba a fajták lekérdezése során: {ex}" });
+                return BadRequest(new AnimalsResponseModel { IsError = true, ErrorMessage = $"Hiba a fajták lekérdezése során: {ex}" });
             }
         }
 
         [HttpGet]
-        [Route("GetKindById")]
+        [Route("Kinds/GetKindById")]
         public async Task<ActionResult<KindResponseModel>> GetKindById(int id)
         {
             try
@@ -57,19 +57,19 @@ namespace backend.Controllers
 
                 if (response.Kind == null)
                 {
-                    return NotFound(new KindResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {id}" });
+                    return NotFound(new AnimalResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {id}" });
                 }
 
                 return Ok(response);
             }
             catch (Exception ex)
             {
-                return BadRequest(new KindResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta lekérdezése során: {ex}" });
+                return BadRequest(new AnimalResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta lekérdezése során: {ex}" });
             }
         }
 
         [HttpPost]
-        [Route("CreateKind")]
+        [Route("Kinds/CreateKind")]
         public async Task<ActionResult<BaseResponseModel>> CreateKind([FromBody] Kind newKind)
         {
             try
@@ -92,7 +92,7 @@ namespace backend.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateKind")]
+        [Route("Kinds/UpdateKind")]
         public async Task<ActionResult<BaseResponseModel>> UpdateKind([FromBody] Kind newKind)
         {
             try
@@ -100,7 +100,7 @@ namespace backend.Controllers
                 var kind = _context.Kinds.FirstOrDefault(x => x.Id == newKind.Id);
                 if (kind == null)
                 {
-                    return NotFound(new BaseResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {newKind.Id}" });
+                    return NotFound(new AnimalResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {newKind.Id}" });
                 }
 
                 var exists = _context.Kinds.Any(x => x.Kind1 == newKind.Kind1 && x.Id != newKind.Id);
@@ -122,14 +122,14 @@ namespace backend.Controllers
 
         [HttpDelete]
         [Route("DeleteKind")]
-        public async Task<ActionResult<BaseResponseModel>> DeleteKind(int id)
+        public ActionResult<bool> DeleteKind(int id)
         {
             try
             {
                 var kind = _context.Kinds.FirstOrDefault(x => x.Id == id);
                 if (kind == null)
                 {
-                    return NotFound(new BaseResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {id}" });
+                    return NotFound(new AnimalResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {id}" });
                 }
 
                 _context.Kinds.Remove(kind);

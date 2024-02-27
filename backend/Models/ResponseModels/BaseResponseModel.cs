@@ -1,4 +1,4 @@
-﻿namespace backend.Controllers.ResponseModels
+﻿namespace backend.Models.ResponseModels
 {
     public class BaseResponseModel
     {

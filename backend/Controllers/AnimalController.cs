@@ -1,5 +1,5 @@
-using backend.Controllers.ResponseModels;
 using backend.Models;
+using backend.Models.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
