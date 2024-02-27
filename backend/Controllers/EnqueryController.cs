@@ -1,4 +1,4 @@
-using backend.Models;
+using backend.Controllers.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -20,10 +20,26 @@ namespace backend.Controllers
         
         [HttpGet]
         [Route("GetAllEnqueries")]
-        public ActionResult<IEnumerable<Enquery>> GetAllEnqueries()
+        public async Task<ActionResult<EnqueriesResponseModel>> GetAllEnqueries()
         {
-            var enqueries = _context.Enqueries.ToList();
-            return Ok(enqueries);
+            try
+            {
+                EnqueriesResponseModel response = new EnqueriesResponseModel
+                {
+                    Enqueries = _context.Enqueries.ToList()
+                };
+
+                if (response.Enqueries == null || !response.Enqueries.Any())
+                {
+                    return NotFound(new EnqueriesResponseModel { IsError = true, ErrorMessage = $"Még nincs egyetlen érdeklõdés sem" });
+                }
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new EnqueriesResponseModel { IsError = true, ErrorMessage = $"Hiba az érdeklõdések lekérdezése során: {ex}" });
+            }
         }
     }
 }
