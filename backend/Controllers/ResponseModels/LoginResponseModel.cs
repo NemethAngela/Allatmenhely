@@ -4,6 +4,6 @@ namespace backend.Controllers.ResponseModels
 {
     public class LoginResponseModel : BaseResponseModel
     {
-        public Admin adminUser { get; set; }
+        public Admin AdminUser { get; set; }
     }
 }
