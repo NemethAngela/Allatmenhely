@@ -24,32 +24,42 @@ namespace backend.Controllers
         [Route("Login")]
         public async Task<ActionResult<LoginResponseModel>> Login([FromBody] LoginRequestModel loginRequest)
         {
-            var admin = _context.Admins.FirstOrDefault(x => x.Email == loginRequest.Email);
-
-            if (admin == null)
+            try
             {
-                return new LoginResponseModel { IsError = true, ErrorMessage = "Admin nem található" };
+                LoginResponseModel response = new LoginResponseModel
+                {
+                    AdminUser = _context.Admins.FirstOrDefault(x => x.Email == loginRequest.Email)
+                };
+
+                if (response.AdminUser == null)
+                {
+                    return new LoginResponseModel { IsError = true, ErrorMessage = "Admin nem található" };
+                }
+
+                var valid = HashHelper.VerifyMD5Hash(loginRequest.Password, response.AdminUser.PasswordSalt, response.AdminUser.PasswordHash);
+
+                if (!valid)
+                {
+                    return new LoginResponseModel { IsError = true, ErrorMessage = "Admin email vagy jelszó nem megfelelõ" };
+                }
+
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = false,
+                    SameSite = SameSiteMode.None,
+                    MaxAge = TimeSpan.FromDays(1)
+                };
+
+                var token = JWTHelper.GenerateToken(response.AdminUser);
+                Response.Cookies.Append("jwtToken", token, cookieOptions);
+
+                return Ok(response);
             }
-
-            var valid = HashHelper.VerifyMD5Hash(loginRequest.Password, admin.PasswordSalt, admin.PasswordHash);
-
-            if (!valid)
+            catch (Exception ex)
             {
-                return new LoginResponseModel { IsError = true, ErrorMessage = "Admin email vagy jelszó nem megfelelõ" };
+                return BadRequest(new AnimalsResponseModel { IsError = true, ErrorMessage = $"Hiba a bejelentkezés során: {ex}" });
             }
-
-            var cookieOptions = new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = false,
-                SameSite = SameSiteMode.None,
-                MaxAge = TimeSpan.FromDays(1)
-            };
-
-            var token = JWTHelper.GenerateToken(admin);
-            Response.Cookies.Append("jwtToken", token, cookieOptions);
-
-            return Ok(new LoginResponseModel { AdminUser = admin });
         }
     }
 }

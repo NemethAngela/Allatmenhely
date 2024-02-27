@@ -1,3 +1,4 @@
+using backend.Controllers.ResponseModels;
 using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,24 +20,51 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllAnimals")]
-        public ActionResult<IEnumerable<Animal>> GetAllAnimals()
+        [Route("Animals/GetAllAnimals")]
+        public async Task<ActionResult<AnimalsResponseModel>> GetAllAnimals()
         {
-            var animals = _context.Animals.ToList();
-            return Ok(animals);
+            try
+            {
+                AnimalsResponseModel response = new AnimalsResponseModel
+                {
+                    Animals = _context.Animals.ToList()
+                };
+
+                if (response.Animals == null || !response.Animals.Any())
+                {
+                    return NotFound(new AnimalsResponseModel { IsError = true, ErrorMessage = $"Még nincs egyetlen állat sem" });
+                }
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new AnimalsResponseModel { IsError = true, ErrorMessage = $"Hiba az állatok lekérdezése során: {ex}" });
+            }
         }
 
         [HttpGet]
-        [Route("GetAnimalById")]
-        public ActionResult<Animal> GetAnimalById(int id)
+        [Route("Animals/GetAnimalById")]
+        public async Task<ActionResult<Animal>> GetAnimalById(int id)
         {
-            var animal = _context.Animals.FirstOrDefault(x => x.Id == id);
-            if (animal == null)
+            try
             {
-                return NotFound("Az állat nem található");
-            }
+                AnimalResponseModel response = new AnimalResponseModel
+                {
+                    Animal = _context.Animals.FirstOrDefault(x => x.Id == id)
+                };
 
-            return Ok(animal);
+                if (response.Animal == null)
+                {
+                    return NotFound(new AnimalResponseModel { IsError = true, ErrorMessage = $"Az állat nem található: id: {id}" });
+                }
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new AnimalResponseModel { IsError = true, ErrorMessage = $"Hiba az állatok lekérdezése során: {ex}" });
+            }
         }
     }
 }
