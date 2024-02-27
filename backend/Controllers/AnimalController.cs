@@ -20,7 +20,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        [Route("Animals/GetAllAnimals")]
+        [Route("GetAllAnimals")]
         public async Task<ActionResult<AnimalsResponseModel>> GetAllAnimals()
         {
             try
@@ -44,8 +44,8 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        [Route("Animals/GetAnimalById")]
-        public async Task<ActionResult<Animal>> GetAnimalById(int id)
+        [Route("GetAnimalById")]
+        public async Task<ActionResult<AnimalResponseModel>> GetAnimalById(int id)
         {
             try
             {

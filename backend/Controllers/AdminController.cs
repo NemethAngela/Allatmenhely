@@ -58,7 +58,7 @@ namespace backend.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new AnimalsResponseModel { IsError = true, ErrorMessage = $"Hiba a bejelentkezés során: {ex}" });
+                return BadRequest(new LoginResponseModel { IsError = true, ErrorMessage = $"Hiba a bejelentkezés során: {ex}" });
             }
         }
     }
