@@ -175,3 +175,4 @@ coverage*.json
 coverage*.xml
 coverage*.html
 /backend/obj/Debug/net6.0/backend.csproj.FileListAbsolute.txt
+/backend/Controllers/AllatmenhelyController.cs
