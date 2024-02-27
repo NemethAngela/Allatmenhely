@@ -74,6 +74,12 @@ namespace backend.Controllers
         {
             try
             {
+                var exists = _context.Kinds.Any(x => x.Kind1 == newKind.Kind1);
+                if (exists)
+                {
+                    return BadRequest(new BaseResponseModel { IsError = true, ErrorMessage = $"A fajta már létezik" });
+                }
+
                 _context.Kinds.Add(newKind);
                 _context.SaveChanges();
 
@@ -87,14 +93,20 @@ namespace backend.Controllers
 
         [HttpPut]
         [Route("Kinds/UpdateKind")]
-        public async Task<ActionResult<BaseResponseModel>> UpdateKind([FromBody] Kind newKind, int id)
+        public async Task<ActionResult<BaseResponseModel>> UpdateKind([FromBody] Kind newKind)
         {
             try
             {
-                var kind = _context.Kinds.FirstOrDefault(x => x.Id == id);
+                var kind = _context.Kinds.FirstOrDefault(x => x.Id == newKind.Id);
                 if (kind == null)
                 {
-                    return NotFound(new AnimalResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {id}" });
+                    return NotFound(new AnimalResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {newKind.Id}" });
+                }
+
+                var exists = _context.Kinds.Any(x => x.Kind1 == newKind.Kind1 && x.Id != newKind.Id);
+                if (exists)
+                {
+                    return BadRequest(new BaseResponseModel { IsError = true, ErrorMessage = $"Ez a fajta már létezik" });
                 }
 
                 kind.Kind1 = newKind.Kind1;
