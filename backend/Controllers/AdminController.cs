@@ -53,7 +53,7 @@ namespace backend.Controllers
                 };
 
                 var token = JWTHelper.GenerateToken(admin, _configuration);
-                Response.Cookies.Append("jwtToken", token, cookieOptions);
+                //Response.Cookies.Append("jwtToken", token, cookieOptions);
 
                 LoginResponseModel response = new LoginResponseModel
                 {
@@ -62,11 +62,11 @@ namespace backend.Controllers
                     Token = token
                 };
 
-                return Ok(response);
+                return response;
             }
             catch (Exception ex)
             {
-                return BadRequest(new LoginResponseModel { IsError = true, ErrorMessage = $"Hiba a bejelentkezés során: {ex}" });
+                return new LoginResponseModel { IsError = true, ErrorMessage = $"Hiba a bejelentkezés során: {ex}" };
             }
         }
     }
