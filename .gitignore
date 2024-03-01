@@ -176,3 +176,8 @@ coverage*.xml
 coverage*.html
 /backend/obj/Debug/net6.0/backend.csproj.FileListAbsolute.txt
 /backend/Controllers/AllatmenhelyController.cs
+/backend/obj/Debug/net6.0/apphost.exe
+/backend/obj/Debug/net6.0/backend.assets.cache
+/backend/obj/backend.csproj.nuget.dgspec.json
+/backend/obj/backend.csproj.nuget.g.props
+/backend/obj/project.assets.json
