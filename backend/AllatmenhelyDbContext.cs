@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using backend.Models;
+﻿using backend.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace backend
 {
     public partial class AllatmenhelyDbContext : DbContext
     {
-        public AllatmenhelyDbContext()
-        {
-        }
+        private readonly IConfiguration _configuration;
 
-        public AllatmenhelyDbContext(DbContextOptions<AllatmenhelyDbContext> options)
-            : base(options)
+        public AllatmenhelyDbContext(DbContextOptions<AllatmenhelyDbContext> options) : base(options)
         {
         }
 
@@ -26,8 +20,7 @@ namespace backend
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySql("server=allatmenhely-allatmenhely.a.aivencloud.com;port=26431;database=defaultdb;user id=avnadmin;password=AVNS_3mZIl5CUrteFcbMPwf_", ServerVersion.Parse("8.0.30-mysql"));
+                optionsBuilder.UseMySql(_configuration.GetConnectionString("AllatmenhelyConnection"), ServerVersion.Parse("8.0.30-mysql"));
             }
         }
 

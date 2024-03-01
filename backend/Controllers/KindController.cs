@@ -1,5 +1,6 @@
 using backend.Models;
 using backend.Models.ResponseModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        [Route("Kinds/GetAllKinds")]
+        [Route("GetAllKinds")]
         public async Task<ActionResult<KindsResponseModel>> GetAllKinds()
         {
             try
@@ -45,7 +46,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        [Route("Kinds/GetKindById")]
+        [Route("GetKindById")]
         public async Task<ActionResult<KindResponseModel>> GetKindById(int id)
         {
             try
@@ -68,8 +69,9 @@ namespace backend.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
-        [Route("Kinds/CreateKind")]
+        [Route("CreateKind")]
         public async Task<ActionResult<BaseResponseModel>> CreateKind([FromBody] Kind newKind)
         {
             try
@@ -91,8 +93,9 @@ namespace backend.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
-        [Route("Kinds/UpdateKind")]
+        [Route("UpdateKind")]
         public async Task<ActionResult<BaseResponseModel>> UpdateKind([FromBody] Kind newKind)
         {
             try
@@ -120,6 +123,7 @@ namespace backend.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("DeleteKind")]
         public ActionResult<bool> DeleteKind(int id)
