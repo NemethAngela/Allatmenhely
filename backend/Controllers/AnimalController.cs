@@ -104,7 +104,6 @@ namespace backend.Controllers
             try
             {
                 animal.IsActive = 1;
-                animal.TimeStamp = DateTime.Now;
                 await _context.Animals.AddAsync(animal);
                 await _context.SaveChangesAsync();
 
