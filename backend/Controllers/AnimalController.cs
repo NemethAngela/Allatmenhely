@@ -1,6 +1,9 @@
+
 using backend.Models;
 using backend.Models.ResponseModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
@@ -9,14 +12,11 @@ namespace backend.Controllers
     public class AnimalController : ControllerBase
     {
         private readonly AllatmenhelyDbContext _context;
-        private readonly ILogger<AnimalController> _logger;
 
         public AnimalController(
-            AllatmenhelyDbContext context,
-            ILogger<AnimalController> logger)
+            AllatmenhelyDbContext context)
         {
             _context = context;
-            _logger = logger;
         }
 
         [HttpGet]
@@ -27,19 +27,14 @@ namespace backend.Controllers
             {
                 AnimalsResponseModel response = new AnimalsResponseModel
                 {
-                    Animals = _context.Animals.ToList()
+                    Animals = await _context.Animals.ToListAsync()
                 };
 
-                if (response.Animals == null || !response.Animals.Any())
-                {
-                    return NotFound(new AnimalsResponseModel { IsError = true, ErrorMessage = $"Még nincs egyetlen állat sem" });
-                }
-
-                return Ok(response);
+                return response;
             }
             catch (Exception ex)
             {
-                return BadRequest(new AnimalsResponseModel { IsError = true, ErrorMessage = $"Hiba az állatok lekérdezése során: {ex}" });
+                return new AnimalsResponseModel { IsError = true, ErrorMessage = $"Hiba az állatok lekérdezése során: {ex}" };
             }
         }
 
@@ -51,19 +46,129 @@ namespace backend.Controllers
             {
                 AnimalResponseModel response = new AnimalResponseModel
                 {
-                    Animal = _context.Animals.FirstOrDefault(x => x.Id == id)
+                    Animal = await _context.Animals.FirstOrDefaultAsync(x => x.Id == id)
                 };
 
                 if (response.Animal == null)
                 {
-                    return NotFound(new AnimalResponseModel { IsError = true, ErrorMessage = $"Az állat nem található: id: {id}" });
+                    return new AnimalResponseModel { IsError = true, ErrorMessage = $"Az állat nem található: id: {id}" };
                 }
 
-                return Ok(response);
+                return response;
             }
             catch (Exception ex)
             {
-                return BadRequest(new AnimalResponseModel { IsError = true, ErrorMessage = $"Hiba az állatok lekérdezése során: {ex}" });
+                return new AnimalResponseModel { IsError = true, ErrorMessage = $"Hiba az állatok lekérdezése során: {ex}" };
+            }
+        }
+
+        [HttpGet]
+        [Route("GetAnimalsByKindId")]
+        public async Task<ActionResult<AnimalsResponseModel>> GetAnimalsByKindId(int kindId)
+        {
+            try
+            {
+                AnimalsResponseModel response;
+
+                if (kindId == -1)
+                {
+                    var kutyaId = _context.Kinds.FirstOrDefaultAsync(x => x.Kind1 == "Kutya")?.Id;
+                    var macskaId = _context.Kinds.FirstOrDefaultAsync(x => x.Kind1 == "Macska")?.Id;
+
+                    response = new AnimalsResponseModel
+                    {
+                        Animals = await _context.Animals.Where(x => x.KindId != kutyaId && x.KindId != macskaId).ToListAsync()
+                    };
+                }
+                else
+                {
+                    response = new AnimalsResponseModel
+                    {
+                        Animals = await _context.Animals.Where(x => x.KindId == kindId).ToListAsync()
+                    };
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return new AnimalsResponseModel { IsError = true, ErrorMessage = $"Hiba az állatok lekérdezése során: {ex}" };
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("CreateAnimal")]
+        public async Task<ActionResult<BaseResponseModel>> CreateAnimal([FromBody] Animal animal)
+        {
+            try
+            {
+                animal.IsActive = 1;
+                animal.TimeStamp = DateTime.Now;
+                await _context.Animals.AddAsync(animal);
+                await _context.SaveChangesAsync();
+
+                return new BaseResponseModel();
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba az állat hozzáadása során: {ex}" };
+            }
+        }
+
+        [Authorize]
+        [HttpPut]
+        [Route("UpdateAnimal")]
+        public async Task<ActionResult<BaseResponseModel>> UpdateAnimal([FromBody] Animal newAnmimal)
+        {
+            try
+            {
+                var animal = await _context.Animals.FirstOrDefaultAsync(x => x.Id == newAnmimal.Id);
+                if (animal == null)
+                {
+                    return new BaseResponseModel { IsError = true, ErrorMessage = $"Az állat nem található: id: {newAnmimal.Id}" };
+                }
+
+                animal.Name = newAnmimal.Name;
+                animal.KindId = newAnmimal.KindId;
+                animal.Age = newAnmimal.Age;
+                animal.IsMale = newAnmimal.IsMale;
+                animal.IsNeutered = newAnmimal.IsNeutered;
+                animal.Description = newAnmimal.Description;
+                animal.Photo = newAnmimal.Photo;
+                animal.IsActive = newAnmimal.IsActive;
+
+                await _context.SaveChangesAsync();
+
+                return new BaseResponseModel();
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba az állat módosítása során: {ex}" };
+            }
+        }
+
+        [Authorize]
+        [HttpDelete]
+        [Route("DeleteAnimal")]
+        public async Task<ActionResult<BaseResponseModel>> DeleteAnimal(int id)
+        {
+            try
+            {
+                var animal = await _context.Animals.FirstOrDefaultAsync(x => x.Id == id);
+                if (animal == null)
+                {
+                    return new BaseResponseModel { IsError = true, ErrorMessage = $"Az állat nem található: id: {id}" };
+                }
+
+                animal.IsActive = 0;
+                await _context.SaveChangesAsync();
+
+                return new BaseResponseModel();
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta törlése során: {ex}" };
             }
         }
     }

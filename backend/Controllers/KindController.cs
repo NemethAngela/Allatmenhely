@@ -11,14 +11,10 @@ namespace backend.Controllers
     public class KindController : ControllerBase
     {
         private readonly AllatmenhelyDbContext _context;
-        private readonly ILogger<KindController> _logger;
 
-        public KindController(
-            AllatmenhelyDbContext context,
-            ILogger<KindController> logger)
+        public KindController(AllatmenhelyDbContext context)
         {
             _context = context;
-            _logger = logger;
         }
 
         [HttpGet]
@@ -29,19 +25,19 @@ namespace backend.Controllers
             {
                 KindsResponseModel response = new KindsResponseModel
                 {
-                    Kinds = _context.Kinds.ToList()
+                    Kinds = await _context.Kinds.ToListAsync()
                 };
 
                 if (response.Kinds == null || !response.Kinds.Any())
                 {
-                    return NotFound(new AnimalsResponseModel { IsError = true, ErrorMessage = $"Még nincs egyetlen fajta sem" });
+                    return new KindsResponseModel { IsError = true, ErrorMessage = $"Még nincs egyetlen fajta sem" };
                 }
 
-                return Ok(response);
+                return response;
             }
             catch (Exception ex)
             {
-                return BadRequest(new AnimalsResponseModel { IsError = true, ErrorMessage = $"Hiba a fajták lekérdezése során: {ex}" });
+                return new KindsResponseModel { IsError = true, ErrorMessage = $"Hiba a fajták lekérdezése során: {ex}" };
             }
         }
 
@@ -53,19 +49,19 @@ namespace backend.Controllers
             {
                 KindResponseModel response = new KindResponseModel
                 {
-                    Kind = _context.Kinds.FirstOrDefault(x => x.Id == id)
+                    Kind = await _context.Kinds.FirstOrDefaultAsync(x => x.Id == id)
                 };
 
                 if (response.Kind == null)
                 {
-                    return NotFound(new AnimalResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {id}" });
+                    return new KindResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {id}" };
                 }
 
-                return Ok(response);
+                return response;
             }
             catch (Exception ex)
             {
-                return BadRequest(new AnimalResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta lekérdezése során: {ex}" });
+                return new KindResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta lekérdezése során: {ex}" };
             }
         }
 
@@ -76,20 +72,20 @@ namespace backend.Controllers
         {
             try
             {
-                var exists = _context.Kinds.Any(x => x.Kind1 == newKind.Kind1);
+                var exists = await _context.Kinds.AnyAsync(x => x.Kind1 == newKind.Kind1);
                 if (exists)
                 {
-                    return BadRequest(new BaseResponseModel { IsError = true, ErrorMessage = $"A fajta már létezik" });
+                    return new BaseResponseModel { IsError = true, ErrorMessage = $"A fajta már létezik" };
                 }
 
                 _context.Kinds.Add(newKind);
                 _context.SaveChanges();
 
-                return Ok(new BaseResponseModel());
+                return new BaseResponseModel();
             }
             catch (Exception ex)
             {
-                return BadRequest(new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta felvétele során: {ex}" });
+                return new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta felvétele során: {ex}" };
             }
         }
 
@@ -100,50 +96,50 @@ namespace backend.Controllers
         {
             try
             {
-                var kind = _context.Kinds.FirstOrDefault(x => x.Id == newKind.Id);
+                var kind = await _context.Kinds.FirstOrDefaultAsync(x => x.Id == newKind.Id);
                 if (kind == null)
                 {
-                    return NotFound(new AnimalResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {newKind.Id}" });
+                    return new BaseResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {newKind.Id}" };
                 }
 
                 var exists = _context.Kinds.Any(x => x.Kind1 == newKind.Kind1 && x.Id != newKind.Id);
                 if (exists)
                 {
-                    return BadRequest(new BaseResponseModel { IsError = true, ErrorMessage = $"Ez a fajta már létezik" });
+                    return new BaseResponseModel { IsError = true, ErrorMessage = $"Ez a fajta már létezik" };
                 }
 
                 kind.Kind1 = newKind.Kind1;
                 _context.SaveChanges();
 
-                return Ok(new BaseResponseModel());
+                return new BaseResponseModel();
             }
             catch (Exception ex)
             {
-                return BadRequest(new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta módosítása során: {ex}" });
+                return new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta módosítása során: {ex}" };
             }
         }
 
         [Authorize]
         [HttpDelete]
         [Route("DeleteKind")]
-        public ActionResult<bool> DeleteKind(int id)
+        public async Task<ActionResult<BaseResponseModel>> DeleteKind(int id)
         {
             try
             {
-                var kind = _context.Kinds.FirstOrDefault(x => x.Id == id);
+                var kind = await _context.Kinds.FirstOrDefaultAsync(x => x.Id == id);
                 if (kind == null)
                 {
-                    return NotFound(new AnimalResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {id}" });
+                    return new BaseResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {id}" };
                 }
 
                 _context.Kinds.Remove(kind);
                 _context.SaveChanges();
 
-                return Ok(true);
+                return new BaseResponseModel();
             }
             catch (Exception ex)
             {
-                return BadRequest(new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta törlése során: {ex}" });
+                return new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta törlése során: {ex}" };
             }
         }
     }

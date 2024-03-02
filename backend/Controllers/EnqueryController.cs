@@ -1,5 +1,6 @@
 using backend.Models.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
@@ -8,14 +9,11 @@ namespace backend.Controllers
     public class EnqueryController : ControllerBase
     {
         private readonly AllatmenhelyDbContext _context;
-        private readonly ILogger<EnqueryController> _logger;
 
         public EnqueryController(
-            AllatmenhelyDbContext context,
-            ILogger<EnqueryController> logger)
+            AllatmenhelyDbContext context)
         {
             _context = context;
-            _logger = logger;
         }
         
         [HttpGet]
@@ -26,19 +24,43 @@ namespace backend.Controllers
             {
                 EnqueriesResponseModel response = new EnqueriesResponseModel
                 {
-                    Enqueries = _context.Enqueries.ToList()
+                    Enqueries = await _context.Enqueries.ToListAsync()
                 };
 
                 if (response.Enqueries == null || !response.Enqueries.Any())
                 {
-                    return NotFound(new EnqueriesResponseModel { IsError = true, ErrorMessage = $"Még nincs egyetlen érdeklõdés sem" });
+                    return new EnqueriesResponseModel { IsError = true, ErrorMessage = $"Még nincs egyetlen érdeklõdés sem" };
                 }
 
-                return Ok(response);
+                return response;
             }
             catch (Exception ex)
             {
-                return BadRequest(new EnqueriesResponseModel { IsError = true, ErrorMessage = $"Hiba az érdeklõdések lekérdezése során: {ex}" });
+                return new EnqueriesResponseModel { IsError = true, ErrorMessage = $"Hiba az érdeklõdések lekérdezése során: {ex}" };
+            }
+        }
+
+        [HttpGet]
+        [Route("GetEnqueriesByAnimalId")]
+        public async Task<ActionResult<EnqueriesResponseModel>> GetEnqueriesByAnimalId(int animalId)
+        {
+            try
+            {
+                EnqueriesResponseModel response = new EnqueriesResponseModel
+                {
+                    Enqueries = await _context.Enqueries.Where(x => x.AnimalId == animalId).ToListAsync()
+                };
+
+                if (response.Enqueries == null || !response.Enqueries.Any())
+                {
+                    return new EnqueriesResponseModel { IsError = true, ErrorMessage = $"Még nincs egyetlen érdeklõdés sem" };
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return new EnqueriesResponseModel { IsError = true, ErrorMessage = $"Hiba az érdeklõdések lekérdezése során: {ex}" };
             }
         }
     }

@@ -1,8 +1,8 @@
 using backend.Helpers;
 using backend.Models.RequestModels;
 using backend.Models.ResponseModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
@@ -11,16 +11,13 @@ namespace backend.Controllers
     public class AdminController : ControllerBase
     {
         private readonly AllatmenhelyDbContext _context;
-        private readonly ILogger<AdminController> _logger;
         private readonly IConfiguration _configuration;
 
         public AdminController(
             AllatmenhelyDbContext context,
-            ILogger<AdminController> logger,
             IConfiguration configuration)
         {
             _context = context;
-            _logger = logger;
             _configuration = configuration;
         }
 
@@ -30,7 +27,7 @@ namespace backend.Controllers
         {
             try
             {
-                var admin = _context.Admins.FirstOrDefault(x => x.Email == loginRequest.Email);
+                var admin = await _context.Admins.FirstOrDefaultAsync(x => x.Email == loginRequest.Email);
 
                 if (admin == null)
                 {
@@ -53,7 +50,7 @@ namespace backend.Controllers
                 };
 
                 var token = JWTHelper.GenerateToken(admin, _configuration);
-                Response.Cookies.Append("jwtToken", token, cookieOptions);
+                //Response.Cookies.Append("jwtToken", token, cookieOptions);
 
                 LoginResponseModel response = new LoginResponseModel
                 {
@@ -62,11 +59,11 @@ namespace backend.Controllers
                     Token = token
                 };
 
-                return Ok(response);
+                return response;
             }
             catch (Exception ex)
             {
-                return BadRequest(new LoginResponseModel { IsError = true, ErrorMessage = $"Hiba a bejelentkezés során: {ex}" });
+                return new LoginResponseModel { IsError = true, ErrorMessage = $"Hiba a bejelentkezés során: {ex}" };
             }
         }
     }
