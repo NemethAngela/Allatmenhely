@@ -1,7 +1,6 @@
 using backend.Helpers;
 using backend.Models.RequestModels;
 using backend.Models.ResponseModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -11,16 +10,13 @@ namespace backend.Controllers
     public class AdminController : ControllerBase
     {
         private readonly AllatmenhelyDbContext _context;
-        private readonly ILogger<AdminController> _logger;
         private readonly IConfiguration _configuration;
 
         public AdminController(
             AllatmenhelyDbContext context,
-            ILogger<AdminController> logger,
             IConfiguration configuration)
         {
             _context = context;
-            _logger = logger;
             _configuration = configuration;
         }
 

@@ -8,14 +8,11 @@ namespace backend.Controllers
     public class EnqueryController : ControllerBase
     {
         private readonly AllatmenhelyDbContext _context;
-        private readonly ILogger<EnqueryController> _logger;
 
         public EnqueryController(
-            AllatmenhelyDbContext context,
-            ILogger<EnqueryController> logger)
+            AllatmenhelyDbContext context)
         {
             _context = context;
-            _logger = logger;
         }
         
         [HttpGet]

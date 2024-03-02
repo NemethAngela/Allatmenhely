@@ -4,7 +4,6 @@ using backend.Controllers;
 using backend.Models;
 using backend.Models.RequestModels;
 using backend.Models.ResponseModels;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using backendTests;
 
@@ -14,7 +13,6 @@ namespace backend.Tests
     public class AdminControllerTests
     {
         private AllatmenhelyDbContext _context;
-        private Mock<ILogger<AdminController>> _loggerMock;
         private Mock<IConfiguration> _configMock;
 
         [TestInitialize]
@@ -22,7 +20,6 @@ namespace backend.Tests
         {
             var options = TestHelper.CreateNewContextOptions();
             _context = new AllatmenhelyDbContext(options);
-            _loggerMock = new Mock<ILogger<AdminController>>();
             _configMock = new Mock<IConfiguration>();
             _configMock.Setup(x => x["Jwt:Secret"]).Returns("ThisIsAVerySecretKeyOfAllatmenhelyWebsite");
             _configMock.Setup(x => x["Jwt:ExpirationHours"]).Returns("24");
@@ -36,7 +33,7 @@ namespace backend.Tests
             _context.Admins.Add(admin);
             _context.SaveChanges();
 
-            var controller = new AdminController(_context, _loggerMock.Object, _configMock.Object);
+            var controller = new AdminController(_context, _configMock.Object);
 
             // Act
             var loginRequest = new LoginRequestModel { Email = "test@test.com", Password = "almafa" };
@@ -59,7 +56,7 @@ namespace backend.Tests
             _context.Admins.Add(admin);
             _context.SaveChanges();
 
-            var controller = new AdminController(_context, _loggerMock.Object, _configMock.Object);
+            var controller = new AdminController(_context, _configMock.Object);
 
             // Act
             var loginRequest = new LoginRequestModel { Email = "blabla@test.com", Password = "almafa" };
@@ -80,7 +77,7 @@ namespace backend.Tests
             _context.Admins.Add(admin);
             _context.SaveChanges();
 
-            var controller = new AdminController(_context, _loggerMock.Object, _configMock.Object);
+            var controller = new AdminController(_context, _configMock.Object);
 
             // Act
             var loginRequest = new LoginRequestModel { Email = "test@test.com", Password = "wrong_password" };
