@@ -2,6 +2,7 @@ using backend.Helpers;
 using backend.Models.RequestModels;
 using backend.Models.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
@@ -26,7 +27,7 @@ namespace backend.Controllers
         {
             try
             {
-                var admin = _context.Admins.FirstOrDefault(x => x.Email == loginRequest.Email);
+                var admin = await _context.Admins.FirstOrDefaultAsync(x => x.Email == loginRequest.Email);
 
                 if (admin == null)
                 {
