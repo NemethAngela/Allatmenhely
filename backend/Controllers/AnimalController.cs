@@ -3,6 +3,7 @@ using backend.Models;
 using backend.Models.ResponseModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
@@ -20,50 +21,50 @@ namespace backend.Controllers
 
         [HttpGet]
         [Route("GetAllAnimals")]
-        public ActionResult<AnimalsResponseModel> GetAllAnimals()
+        public async Task<ActionResult<AnimalsResponseModel>> GetAllAnimals()
         {
             try
             {
                 AnimalsResponseModel response = new AnimalsResponseModel
                 {
-                    Animals = _context.Animals.ToList()
+                    Animals = await _context.Animals.ToListAsync()
                 };
 
-                return Ok(response);
+                return response;
             }
             catch (Exception ex)
             {
-                return BadRequest(new AnimalsResponseModel { IsError = true, ErrorMessage = $"Hiba az állatok lekérdezése során: {ex}" });
+                return new AnimalsResponseModel { IsError = true, ErrorMessage = $"Hiba az állatok lekérdezése során: {ex}" };
             }
         }
 
         [HttpGet]
         [Route("GetAnimalById")]
-        public ActionResult<AnimalResponseModel> GetAnimalById(int id)
+        public async Task<ActionResult<AnimalResponseModel>> GetAnimalById(int id)
         {
             try
             {
                 AnimalResponseModel response = new AnimalResponseModel
                 {
-                    Animal = _context.Animals.FirstOrDefault(x => x.Id == id)
+                    Animal = await _context.Animals.FirstOrDefaultAsync(x => x.Id == id)
                 };
 
                 if (response.Animal == null)
                 {
-                    return NotFound(new AnimalResponseModel { IsError = true, ErrorMessage = $"Az állat nem található: id: {id}" });
+                    return new AnimalResponseModel { IsError = true, ErrorMessage = $"Az állat nem található: id: {id}" };
                 }
 
-                return Ok(response);
+                return response;
             }
             catch (Exception ex)
             {
-                return BadRequest(new AnimalResponseModel { IsError = true, ErrorMessage = $"Hiba az állatok lekérdezése során: {ex}" });
+                return new AnimalResponseModel { IsError = true, ErrorMessage = $"Hiba az állatok lekérdezése során: {ex}" };
             }
         }
 
         [HttpGet]
         [Route("GetAnimalsByKindId")]
-        public ActionResult<AnimalsResponseModel> GetAnimalsByKindId(int kindId)
+        public async Task<ActionResult<AnimalsResponseModel>> GetAnimalsByKindId(int kindId)
         {
             try
             {
@@ -71,61 +72,61 @@ namespace backend.Controllers
 
                 if (kindId == -1)
                 {
-                    var kutyaId = _context.Kinds.FirstOrDefault(x => x.Kind1 == "Kutya")?.Id;
-                    var macskaId = _context.Kinds.FirstOrDefault(x => x.Kind1 == "Macska")?.Id;
+                    var kutyaId = _context.Kinds.FirstOrDefaultAsync(x => x.Kind1 == "Kutya")?.Id;
+                    var macskaId = _context.Kinds.FirstOrDefaultAsync(x => x.Kind1 == "Macska")?.Id;
 
                     response = new AnimalsResponseModel
                     {
-                        Animals = _context.Animals.Where(x => x.KindId != kutyaId && x.KindId != macskaId).ToList()
+                        Animals = await _context.Animals.Where(x => x.KindId != kutyaId && x.KindId != macskaId).ToListAsync()
                     };
                 }
                 else
                 {
                     response = new AnimalsResponseModel
                     {
-                        Animals = _context.Animals.Where(x => x.KindId == kindId).ToList()
+                        Animals = await _context.Animals.Where(x => x.KindId == kindId).ToListAsync()
                     };
                 }
 
-                return Ok(response);
+                return response;
             }
             catch (Exception ex)
             {
-                return BadRequest(new AnimalsResponseModel { IsError = true, ErrorMessage = $"Hiba az állatok lekérdezése során: {ex}" });
+                return new AnimalsResponseModel { IsError = true, ErrorMessage = $"Hiba az állatok lekérdezése során: {ex}" };
             }
         }
 
         [Authorize]
         [HttpPost]
         [Route("CreateAnimal")]
-        public ActionResult<BaseResponseModel> CreateAnimal([FromBody] Animal animal)
+        public async Task<ActionResult<BaseResponseModel>> CreateAnimal([FromBody] Animal animal)
         {
             try
             {
                 animal.IsActive = 1;
                 animal.TimeStamp = DateTime.Now;
-                _context.Animals.Add(animal);
-                _context.SaveChanges();
+                await _context.Animals.AddAsync(animal);
+                await _context.SaveChangesAsync();
 
-                return Ok(new BaseResponseModel());
+                return new BaseResponseModel();
             }
             catch (Exception ex)
             {
-                return BadRequest(new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba az állat hozzáadása során: {ex}" });
+                return new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba az állat hozzáadása során: {ex}" };
             }
         }
 
         [Authorize]
         [HttpPut]
         [Route("UpdateAnimal")]
-        public ActionResult<BaseResponseModel> UpdateAnimal([FromBody] Animal newAnmimal)
+        public async Task<ActionResult<BaseResponseModel>> UpdateAnimal([FromBody] Animal newAnmimal)
         {
             try
             {
-                var animal = _context.Animals.FirstOrDefault(x => x.Id == newAnmimal.Id);
+                var animal = await _context.Animals.FirstOrDefaultAsync(x => x.Id == newAnmimal.Id);
                 if (animal == null)
                 {
-                    return NotFound(new BaseResponseModel { IsError = true, ErrorMessage = $"Az állat nem található: id: {newAnmimal.Id}" });
+                    return new BaseResponseModel { IsError = true, ErrorMessage = $"Az állat nem található: id: {newAnmimal.Id}" };
                 }
 
                 animal.Name = newAnmimal.Name;
@@ -137,37 +138,37 @@ namespace backend.Controllers
                 animal.Photo = newAnmimal.Photo;
                 animal.IsActive = newAnmimal.IsActive;
 
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return Ok(new BaseResponseModel());
+                return new BaseResponseModel();
             }
             catch (Exception ex)
             {
-                return BadRequest(new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba az állat módosítása során: {ex}" });
+                return new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba az állat módosítása során: {ex}" };
             }
         }
 
         [Authorize]
         [HttpDelete]
         [Route("DeleteAnimal")]
-        public ActionResult<BaseResponseModel> DeleteAnimal(int id)
+        public async Task<ActionResult<BaseResponseModel>> DeleteAnimal(int id)
         {
             try
             {
-                var animal = _context.Animals.FirstOrDefault(x => x.Id == id);
+                var animal = await _context.Animals.FirstOrDefaultAsync(x => x.Id == id);
                 if (animal == null)
                 {
-                    return NotFound(new BaseResponseModel { IsError = true, ErrorMessage = $"Az állat nem található: id: {id}" });
+                    return new BaseResponseModel { IsError = true, ErrorMessage = $"Az állat nem található: id: {id}" };
                 }
 
                 animal.IsActive = 0;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
-                return Ok(new BaseResponseModel());
+                return new BaseResponseModel();
             }
             catch (Exception ex)
             {
-                return BadRequest(new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta törlése során: {ex}" });
+                return new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta törlése során: {ex}" };
             }
         }
     }
