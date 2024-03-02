@@ -22,5 +22,11 @@ namespace backend.Tests
         {
             Assert.Fail();
         }
+
+        [TestMethod()]
+        public void CreateEnqueryTest()
+        {
+            Assert.Fail();
+        }
     }
 }

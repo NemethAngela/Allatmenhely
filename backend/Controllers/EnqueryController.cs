@@ -1,3 +1,4 @@
+using backend.Models;
 using backend.Models.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -61,6 +62,23 @@ namespace backend.Controllers
             catch (Exception ex)
             {
                 return new EnqueriesResponseModel { IsError = true, ErrorMessage = $"Hiba az érdeklõdések lekérdezése során: {ex}" };
+            }
+        }
+
+        [HttpPost]
+        [Route("CreateEnquery")]
+        public async Task<ActionResult<BaseResponseModel>> CreateEnquery([FromBody] Enquery newEnquery)
+        {
+            try
+            {
+                await _context.Enqueries.AddAsync(newEnquery);
+                await _context.SaveChangesAsync();
+
+                return new BaseResponseModel();
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba az érdeklõdés felvétele során: {ex}" };
             }
         }
     }
