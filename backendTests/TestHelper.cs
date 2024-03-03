@@ -37,7 +37,8 @@ namespace backendTests
             var enqueries = new List<Enquery>
             {
                 new Enquery { Id = 1, TimeStamp = DateTime.Now, Phone = "123456789", AnimalId = 1, Email = "enquery1@example.com" },
-                new Enquery { Id = 2, TimeStamp = DateTime.Now, Phone = "987654321", AnimalId = 2, Email = "enquery2@example.com" }
+                new Enquery { Id = 2, TimeStamp = DateTime.Now, Phone = "987654321", AnimalId = 2, Email = "enquery2@example.com" },
+                new Enquery { Id = 3, TimeStamp = DateTime.Now, Phone = "234567890", AnimalId = 2, Email = "enquery3@example.com" }
             };
             _context.Enqueries.AddRange(enqueries);
 

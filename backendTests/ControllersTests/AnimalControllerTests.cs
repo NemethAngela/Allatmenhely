@@ -6,43 +6,37 @@ namespace backend.Tests
     public class AnimalControllerTests
     {
         [TestMethod()]
-        public void AnimalControllerTest()
+        public async Task GetAllAnimalsTest()
         {
             Assert.Fail();
         }
 
         [TestMethod()]
-        public void GetAllAnimalsTest()
+        public async Task GetAnimalByIdTest()
         {
             Assert.Fail();
         }
 
         [TestMethod()]
-        public void GetAnimalByIdTest()
+        public async Task GetAnimalsByKindIdTest()
         {
             Assert.Fail();
         }
 
         [TestMethod()]
-        public void GetAnimalsByKindIdTest()
+        public async Task CreateAnimalTest()
         {
             Assert.Fail();
         }
 
         [TestMethod()]
-        public void CreateAnimalTest()
+        public async Task UpdateAnimalTest()
         {
             Assert.Fail();
         }
 
         [TestMethod()]
-        public void UpdateAnimalTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void DeleteAnimalTest()
+        public async Task DeleteAnimalTest()
         {
             Assert.Fail();
         }
