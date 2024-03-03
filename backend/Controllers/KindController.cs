@@ -78,8 +78,8 @@ namespace backend.Controllers
                     return new BaseResponseModel { IsError = true, ErrorMessage = $"A fajta már létezik" };
                 }
 
-                _context.Kinds.Add(newKind);
-                _context.SaveChanges();
+                await _context.Kinds.AddAsync(newKind);
+                await _context.SaveChangesAsync();
 
                 return new BaseResponseModel();
             }
@@ -102,14 +102,14 @@ namespace backend.Controllers
                     return new BaseResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {newKind.Id}" };
                 }
 
-                var exists = _context.Kinds.Any(x => x.Kind1 == newKind.Kind1 && x.Id != newKind.Id);
+                var exists = await _context.Kinds.AnyAsync(x => x.Kind1 == newKind.Kind1 && x.Id != newKind.Id);
                 if (exists)
                 {
                     return new BaseResponseModel { IsError = true, ErrorMessage = $"Ez a fajta már létezik" };
                 }
 
                 kind.Kind1 = newKind.Kind1;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 return new BaseResponseModel();
             }
@@ -132,8 +132,8 @@ namespace backend.Controllers
                     return new BaseResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {id}" };
                 }
 
-                _context.Kinds.Remove(kind);
-                _context.SaveChanges();
+                _context.Kinds.RemoveRange(kind);
+                await _context.SaveChangesAsync();
 
                 return new BaseResponseModel();
             }

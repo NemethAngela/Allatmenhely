@@ -66,11 +66,11 @@ namespace backend
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                entity.HasOne(d => d.Kind)
-                    .WithMany(p => p.Animals)
-                    .HasForeignKey(d => d.KindId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Animal_ibfk_1");
+                //entity.HasOne(d => d.Kind)
+                //    .WithMany(p => p.Animals)
+                //    .HasForeignKey(d => d.KindId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("Animal_ibfk_1");
             });
 
             modelBuilder.Entity<Enquery>(entity =>
@@ -87,11 +87,11 @@ namespace backend
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                entity.HasOne(d => d.Animal)
-                    .WithMany(p => p.Enqueries)
-                    .HasForeignKey(d => d.AnimalId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Enquery_ibfk_1");
+                //entity.HasOne(d => d.Animal)
+                //    .WithMany(p => p.Enqueries)
+                //    .HasForeignKey(d => d.AnimalId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("Enquery_ibfk_1");
             });
 
             modelBuilder.Entity<Kind>(entity =>

@@ -3,10 +3,10 @@ namespace backend.Models
 {
     public partial class Animal
     {
-        public Animal()
-        {
-            Enqueries = new HashSet<Enquery>();
-        }
+        //public Animal()
+        //{
+        //    Enqueries = new HashSet<Enquery>();
+        //}
 
         public int Id { get; set; }
         public string Name { get; set; } = null!;
@@ -19,7 +19,7 @@ namespace backend.Models
         public ulong IsActive { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public virtual Kind Kind { get; set; } = null!;
-        public virtual ICollection<Enquery> Enqueries { get; set; }
+        //public virtual Kind Kind { get; set; } = null!;
+        //public virtual ICollection<Enquery> Enqueries { get; set; }
     }
 }

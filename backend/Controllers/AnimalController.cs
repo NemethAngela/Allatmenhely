@@ -1,4 +1,3 @@
-
 using backend.Models;
 using backend.Models.ResponseModels;
 using Microsoft.AspNetCore.Authorization;
@@ -72,8 +71,8 @@ namespace backend.Controllers
 
                 if (kindId == -1)
                 {
-                    var kutyaId = _context.Kinds.FirstOrDefaultAsync(x => x.Kind1 == "Kutya")?.Id;
-                    var macskaId = _context.Kinds.FirstOrDefaultAsync(x => x.Kind1 == "Macska")?.Id;
+                    var kutyaId = _context.Kinds.FirstOrDefault(x => x.Kind1 == "Kutya")?.Id;
+                    var macskaId = _context.Kinds.FirstOrDefault(x => x.Kind1 == "Macska")?.Id;
 
                     response = new AnimalsResponseModel
                     {
@@ -104,7 +103,6 @@ namespace backend.Controllers
             try
             {
                 animal.IsActive = 1;
-                animal.TimeStamp = DateTime.Now;
                 await _context.Animals.AddAsync(animal);
                 await _context.SaveChangesAsync();
 
