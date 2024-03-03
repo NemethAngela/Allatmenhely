@@ -132,7 +132,7 @@ namespace backend.Controllers
                     return new BaseResponseModel { IsError = true, ErrorMessage = $"A fajta nem található: id: {id}" };
                 }
 
-                await _context.Kinds.RemoveRange(kind);
+                _context.Kinds.RemoveRange(kind);
                 await _context.SaveChangesAsync();
 
                 return new BaseResponseModel();

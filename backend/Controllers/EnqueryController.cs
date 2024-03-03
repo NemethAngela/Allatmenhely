@@ -28,11 +28,6 @@ namespace backend.Controllers
                     Enqueries = await _context.Enqueries.ToListAsync()
                 };
 
-                if (response.Enqueries == null || !response.Enqueries.Any())
-                {
-                    return new EnqueriesResponseModel { IsError = true, ErrorMessage = $"Még nincs egyetlen érdeklõdés sem" };
-                }
-
                 return response;
             }
             catch (Exception ex)
