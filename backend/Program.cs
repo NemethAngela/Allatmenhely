@@ -51,22 +51,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt:Secret"]))
-        }; 
-
-        // Kivételek hozzáadása a token autentikációhoz
-        //options.Events = new JwtBearerEvents
-        //{
-        //    OnMessageReceived = context =>
-        //    {
-        //        // Az endpoint ellenőrzése, hogy a token autentikáció ne legyen alkalmazva a login végpontra
-        //        if (context.HttpContext.Request.Path.StartsWithSegments("/api/login") &&
-        //            context.HttpContext.Request.Method.Equals("POST", StringComparison.OrdinalIgnoreCase))
-        //        {
-        //            context.Token = context.Request.Query["access_token"];
-        //        }
-        //        return Task.CompletedTask;
-        //    }
-        //};
+        };
     });
 
 builder.Services.AddSwaggerGen(c =>

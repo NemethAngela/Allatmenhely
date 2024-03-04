@@ -2,28 +2,13 @@
 using backend.Models;
 using backend.Models.ResponseModels;
 using backendTests;
-using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 namespace backend.Tests
 {
     [TestClass()]
-    public class EnqueryControllerTests
+    public class EnqueryControllerTests : TestBase
     {
-        private AllatmenhelyDbContext _context;
-        private Mock<IConfiguration> _configMock;
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            var options = TestHelper.CreateNewContextOptions();
-            _context = new AllatmenhelyDbContext(options);
-            _configMock = new Mock<IConfiguration>();
-            _configMock.Setup(x => x["Jwt:Secret"]).Returns("ThisIsAVerySecretKeyOfAllatmenhelyWebsite");
-            _configMock.Setup(x => x["Jwt:ExpirationHours"]).Returns("24");
-        }
-
         [TestMethod()]
         public async Task GetAllEnqueriesTest()
         {
