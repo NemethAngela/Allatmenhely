@@ -113,9 +113,9 @@ namespace backend.Tests
                 Description = "Nagyon kedves cica",
                 KindId = 2,
                 Age = 1,
-                IsMale = 1,
-                IsNeutered = 1,
-                IsActive = 1
+                IsMale = true,
+                IsNeutered = true,
+                IsActive = true
             };
 
             // Act
@@ -186,7 +186,7 @@ namespace backend.Tests
             Assert.IsFalse(response.IsError);
             var deletedAnimal = _context.Animals.FirstOrDefault(x => x.Id == allat.Id);
             Assert.IsNotNull(deletedAnimal);
-            Assert.AreEqual(0, (int)deletedAnimal.IsActive);
+            Assert.AreEqual(false, deletedAnimal.IsActive);
         }
 
         [TestMethod()]
