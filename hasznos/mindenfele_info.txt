@@ -1,0 +1,8 @@
+Minta dokumentációra:
+
+https://infojegyzet.hu/webszerkesztes/dokumentacio/
+
+
+Adatbázis az Aiven szerveren:
+
+  //"DefaultConnection": "server=allatmenhely-allatmenhely.a.aivencloud.com;port=26431;database=defaultdb;user id=avnadmin;password=AVNS_3mZIl5CUrteFcbMPwf_"

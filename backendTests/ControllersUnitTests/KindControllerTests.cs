@@ -115,7 +115,7 @@ namespace backend.Tests
             var controller = new KindController(_context);
             var elsoFajta = _context.Kinds.First();
             var regiFajta = elsoFajta.Kind1;
-            elsoFajta.Kind1 = elsoFajta.Kind1 + "updated";
+            elsoFajta.Kind1 = regiFajta + "updated";
 
             // Act
             var result = await controller.UpdateKind(elsoFajta);
@@ -187,7 +187,7 @@ namespace backend.Tests
         }
 
         [TestMethod()]
-        public async Task DeleteKindTest_Unsuccessful()
+        public async Task DeleteKindTest_NotFound()
         {
             // Arrange
             TestHelper.FillTestDb(_context);
