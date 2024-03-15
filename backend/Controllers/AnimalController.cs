@@ -166,7 +166,7 @@ namespace backend.Controllers
             }
             catch (Exception ex)
             {
-                return new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba a fajta törlése során: {ex}" };
+                return new BaseResponseModel { IsError = true, ErrorMessage = $"Hiba az állat törlése során: {ex}" };
             }
         }
     }
