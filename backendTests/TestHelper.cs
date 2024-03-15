@@ -27,10 +27,10 @@ namespace backendTests
 
             var animals = new List<Animal>
             {
-                new Animal { Id = 1, Name = "Bodri", KindId = 1, Age = 3, IsMale = 1, IsNeutered = 0, IsActive = 1, TimeStamp = DateTime.Now },
-                new Animal { Id = 2, Name = "Cirmi", KindId = 2, Age = 2, IsMale = 0, IsNeutered = 1, IsActive = 1, TimeStamp = DateTime.Now },
-                new Animal { Id = 3, Name = "Dundi", KindId = 3, Age = 1, IsMale = 1, IsNeutered = 0, IsActive = 1, TimeStamp = DateTime.Now },
-                new Animal { Id = 4, Name = "Füles", KindId = 3, Age = 1, IsMale = 1, IsNeutered = 1, IsActive = 1, TimeStamp = DateTime.Now }
+                new Animal { Id = 1, Name = "Bodri", KindId = 1, Age = 3, IsMale = true, IsNeutered = false, IsActive = true, TimeStamp = DateTime.Now },
+                new Animal { Id = 2, Name = "Cirmi", KindId = 2, Age = 2, IsMale = false, IsNeutered = true, IsActive = true, TimeStamp = DateTime.Now },
+                new Animal { Id = 3, Name = "Dundi", KindId = 3, Age = 1, IsMale = true, IsNeutered = false, IsActive = true, TimeStamp = DateTime.Now },
+                new Animal { Id = 4, Name = "Füles", KindId = 3, Age = 1, IsMale = true, IsNeutered = true, IsActive = true, TimeStamp = DateTime.Now }
             };
             _context.Animals.AddRange(animals);
 

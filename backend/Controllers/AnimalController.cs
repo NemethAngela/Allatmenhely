@@ -102,7 +102,7 @@ namespace backend.Controllers
         {
             try
             {
-                animal.IsActive = 1;
+                animal.IsActive = true;
                 await _context.Animals.AddAsync(animal);
                 await _context.SaveChangesAsync();
 
@@ -159,7 +159,7 @@ namespace backend.Controllers
                     return new BaseResponseModel { IsError = true, ErrorMessage = $"Az állat nem található: id: {id}" };
                 }
 
-                animal.IsActive = 0;
+                animal.IsActive = false;
                 await _context.SaveChangesAsync();
 
                 return new BaseResponseModel();
