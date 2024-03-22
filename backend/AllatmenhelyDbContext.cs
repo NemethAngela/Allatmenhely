@@ -60,7 +60,7 @@ namespace backend
 
                 entity.Property(e => e.Name).HasMaxLength(50);
 
-                entity.Property(e => e.Photo).HasColumnType("text");
+                entity.Property(e => e.Photo).HasColumnType("BLOB");
 
                 entity.Property(e => e.TimeStamp)
                     .HasColumnType("timestamp")
