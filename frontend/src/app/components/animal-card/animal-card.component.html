@@ -1,0 +1,6 @@
+<div class="animal-card" (click)="showDetails($event)">
+    <img [alt]="animal.name" [src]="photo">
+    <h3>{{ animal.name }} ({{ animal.age }} hónapos)</h3>
+    <p class="long-text">Jellemzők: {{ animal.description }}</p>
+    <button class="btn btn-primary" (click)="reserve()">Foglalás</button>
+</div>

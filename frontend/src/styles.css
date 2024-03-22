@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* html, body { height: 100%; }
+body { 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: #222; }
+
+.container {
+    max-width: 1800px; 
+    padding: 20px;
+    background-color: gray; 
+  } */
+
+.animal-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    transition: all 0.3s;
+}
+.animal-card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.animal-card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.animal-details-card {
+    max-width: 400px;
+    margin-bottom: 8px;
+}
