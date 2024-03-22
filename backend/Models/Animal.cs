@@ -15,7 +15,7 @@ namespace backend.Models
         public bool? IsMale { get; set; }
         public bool IsNeutered { get; set; }
         public string? Description { get; set; }
-        public byte[]? Photo { get; set; }
+        public string? Photo { get; set; }
         public bool IsActive { get; set; }
         public DateTime TimeStamp { get; set; }
 
