@@ -1,0 +1,33 @@
+<!-- Login dialog -->
+<h1 mat-dialog-title>Bejelentkezés</h1>
+<div mat-dialog-content>
+
+    <mat-form-field style="width: 100%;">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="admin@gmail.com" [formControl]="email" required>
+        <mat-error *ngIf="email.hasError('email')">
+            Az email formátuma nem megfelelő
+        </mat-error>
+        <mat-error *ngIf="email.hasError('required')">
+            Az email megadása kötelező
+        </mat-error>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    
+    <br/>
+    
+    <mat-form-field style="width: 100%;">
+        <mat-label>Jelszó</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" required>
+        <mat-error *ngIf="password.hasError('required')">
+            A jelszó megadása kötelező
+        </mat-error>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+    
+    <br/>
+    
+    <button mat-raised-button (click)="onLoginClick($event)">Bejelentkezés</button>
+</div>

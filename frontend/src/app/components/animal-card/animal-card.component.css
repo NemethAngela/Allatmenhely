@@ -1,0 +1,20 @@
+.animal-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    transition: all 0.3s;
+}
+.animal-card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.animal-card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.long-text {
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
