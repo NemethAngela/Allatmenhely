@@ -65,7 +65,6 @@ namespace backend.Controllers
             }
         }
 
-        [Authorize]
         [HttpPost]
         [Route("CreateKind")]
         public async Task<ActionResult<BaseResponseModel>> CreateKind([FromBody] Kind newKind)
@@ -89,7 +88,6 @@ namespace backend.Controllers
             }
         }
 
-        [Authorize]
         [HttpPut]
         [Route("UpdateKind")]
         public async Task<ActionResult<BaseResponseModel>> UpdateKind([FromBody] Kind newKind)
@@ -119,7 +117,6 @@ namespace backend.Controllers
             }
         }
 
-        [Authorize]
         [HttpDelete]
         [Route("DeleteKind")]
         public async Task<ActionResult<BaseResponseModel>> DeleteKind(int id)

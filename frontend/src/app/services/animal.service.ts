@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { AnimalsResponseModel } from 'src/app/models/animalsresponsemodel.model';
 import { AnimalResponseModel } from 'src/app/models/animalresponsemodel.model';
 import { Animal } from 'src/app/models/animal.model';
-import { Animalregistration } from 'src/app/models/animalregistration';
 import { AuthInterceptor } from 'src/app/services/auth.interceptor';
+import { BaseResponseModel } from '../models/baseresponsemodel.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class AnimalService {
     return this.http.get<AnimalResponseModel>(this.apiUrl + 'GetAnimalById?id=' + id);
   }
 
-  createAnimal(animalInfo: Animalregistration): Observable<Boolean> {    
-    return this.http.post<Boolean>(this.apiUrl + 'CreateAnimal', animalInfo);    
+  createAnimal(newAnimal: Animal): Observable<BaseResponseModel> {    
+    return this.http.post<BaseResponseModel>(this.apiUrl + 'CreateAnimal', newAnimal);    
   }
 }

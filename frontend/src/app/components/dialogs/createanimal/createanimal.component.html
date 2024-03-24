@@ -7,15 +7,6 @@
         <mat-error *ngIf="name.hasError">A név megadása kötelező</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>Születési dátum</mat-label>
-        <input matInput [matDatepicker]="picker">
-        <mat-hint>YYYY/MM/DD</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-
     <mat-form-field style="width: 90%;">
         <mat-label>Életkor (hónap)</mat-label>
         <input matInput [formControl]="age" required>
@@ -25,17 +16,7 @@
     <mat-form-field style="width: 90%;">
         <mat-label>Az állat fajtája</mat-label>
         <mat-select matInput [formControl]="kindId">
-            <mat-option value="121">Kutya</mat-option>
-            <mat-option value="122">Macska</mat-option>
-            <mat-option value="123">Egyéb</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <mat-form-field style="width: 90%;">
-        <mat-label>Az állat neme</mat-label>
-        <mat-select matInput [formControl]="isMale">
-            <mat-option value=true>Hím</mat-option>
-            <mat-option value=false>Nőstény</mat-option>
+            <mat-option *ngFor="let kind of kinds" [value]="kind.id">{{ kind.kind1 }}</mat-option>
         </mat-select>
     </mat-form-field>
 
@@ -45,10 +26,11 @@
     </mat-form-field>
 
     <section>
-        <mat-checkbox>A menhelyen van</mat-checkbox>
-        <mat-checkbox>Ivartalanítva</mat-checkbox>
+        <mat-checkbox [formControl]="isMale">Hím</mat-checkbox>
+        <mat-checkbox [formControl]="isNeutered">Ivartalanítva</mat-checkbox>
     </section>
 
-    <button mat-raised-button (click)="onSaveAnimalClick()">Mentés</button>
+    <br/>
 
+    <button mat-raised-button (click)="onSaveAnimalClick()">Mentés</button>
 </div>

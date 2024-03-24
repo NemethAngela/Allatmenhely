@@ -5,7 +5,7 @@ import { Animal } from 'src/app/models/animal.model';
 import { Kind } from 'src/app/models/kind.model';
 import { Admin } from 'src/app/models/admin.model';
 import { AuthService } from '../../../services/auth.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { LoginDialog } from '../../dialogs/login/logindialog';
 import { LoginResponseModel } from 'src/app/models/loginresponsemodel.model';
 import { AnimalDetails } from '../../dialogs/animaldetails/animal.details';
@@ -72,7 +72,13 @@ export class AllatlistaComponent implements OnInit {
   }
 
   onCreateAnimalClick(): void {
-    const dialogRef = this.dialog.open(CreateanimalComponent)
-   }
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+        kinds: this.kinds
+    };
+
+    const dialogRef = this.dialog.open(CreateanimalComponent, dialogConfig);
+  }
 
 }
