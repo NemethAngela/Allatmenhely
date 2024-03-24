@@ -1,4 +1,5 @@
 
+<div class="header">
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">Mázli állatmenhely</a>
@@ -12,16 +13,23 @@
                     <button mat-raised-button (click)="onLoginClick($event)">Bejelentkezés</button>
                   </div>
                   <ng-template #loggedIn>
+                    
                     <div>
                       Üdvözöllek {{ loggedInUser?.email ?? loggedInUser }} !
                       <button mat-raised-button (click)="onLogoutClick()">Kilépés</button>
+                    </div>                  
+                                        
+                    <div>
+                      <button mat-raised-button (click)="onCreateAnimalClick()">Állat felvétele</button>
                     </div>
+                    
                   </ng-template>
               </li>
           </ul>
       </div>
   </nav>
 </header>
+</div>
 
 <div class="container">
   <ul class="nav nav-tabs" id="myTab" role="tablist">

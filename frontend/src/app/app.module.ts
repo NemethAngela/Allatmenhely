@@ -5,29 +5,34 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AllatlistaComponent } from './components/pages/allatlista/allatlista.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { AnimalCardComponent } from './components/animal-card/animal-card.component';
 import { LoginDialog } from './components/dialogs/login/logindialog';
+import { CreateanimalComponent } from './components/dialogs/createanimal/createanimal.component';
+import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
     AllatlistaComponent,
     AnimalCardComponent,
     LoginDialog,
+    CreateanimalComponent
   ],
   imports: [
     BrowserModule,
@@ -41,10 +46,15 @@ import { LoginDialog } from './components/dialogs/login/logindialog';
     MatTabsModule,
     MatCardModule,
     MatButtonModule,
-    MatInputModule, 
+    MatInputModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCheckboxModule
+
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginDialog } from '../../dialogs/login/logindialog';
 import { LoginResponseModel } from 'src/app/models/loginresponsemodel.model';
 import { AnimalDetails } from '../../dialogs/animaldetails/animal.details';
+import { CreateanimalComponent } from '../../dialogs/createanimal/createanimal.component';
 
 @Component({
   selector: 'app-root',
@@ -24,9 +25,9 @@ export class AllatlistaComponent implements OnInit {
   selectedKindId: number | undefined;
 
   constructor(
-    public dialog: MatDialog, 
+    public dialog: MatDialog,
     private authService: AuthService,
-    private animalService: AnimalService, 
+    private animalService: AnimalService,
     private kindService: KindService) { }
 
   ngOnInit(): void {
@@ -69,4 +70,9 @@ export class AllatlistaComponent implements OnInit {
   onLogoutClick(): void {
     this.authService.setLoggedInUser(null);
   }
+
+  onCreateAnimalClick(): void {
+    const dialogRef = this.dialog.open(CreateanimalComponent)
+   }
+
 }
