@@ -1,5 +1,5 @@
 export interface Animal {
-    id: number;
+    id?: number | -1;
     name: string;
     kindId: number;
     age: number;
@@ -7,6 +7,6 @@ export interface Animal {
     isNeutered: boolean;
     description?: string | null;
     photo?: string | null;
-    isActive: boolean;
-    timeStamp: Date;
+    isActive?: boolean | true;
+    timeStamp?: Date | null;
 }

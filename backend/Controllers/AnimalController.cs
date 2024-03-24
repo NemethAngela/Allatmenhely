@@ -95,7 +95,6 @@ namespace backend.Controllers
             }
         }
 
-        [Authorize]
         [HttpPost]
         [Route("CreateAnimal")]
         public async Task<ActionResult<BaseResponseModel>> CreateAnimal([FromBody] Animal animal)
@@ -114,7 +113,6 @@ namespace backend.Controllers
             }
         }
 
-        [Authorize]
         [HttpPut]
         [Route("UpdateAnimal")]
         public async Task<ActionResult<BaseResponseModel>> UpdateAnimal([FromBody] Animal newAnmimal)
@@ -146,7 +144,6 @@ namespace backend.Controllers
             }
         }
 
-        [Authorize]
         [HttpDelete]
         [Route("DeleteAnimal")]
         public async Task<ActionResult<BaseResponseModel>> DeleteAnimal(int id)

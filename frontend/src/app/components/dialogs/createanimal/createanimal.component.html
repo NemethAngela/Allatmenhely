@@ -1,0 +1,42 @@
+<h1 mat-dialoge-title>Állat rögzítése</h1>
+<div mat-dialog-content>
+
+    <mat-form-field style="width: 90%;">
+        <mat-label>Név</mat-label>
+        <input matInput [formControl]="name" required>
+        <mat-error *ngIf="name.hasError">A név megadása kötelező</mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="width: 90%;">
+        <mat-label>Életkor (hónap)</mat-label>
+        <input matInput [formControl]="age" required>
+        <mat-error *ngIf="age.hasError">Az életkor megadása kötelező</mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="width: 90%;">
+        <mat-label>Az állat fajtája</mat-label>
+        <mat-select matInput [formControl]="kindId">
+            <mat-option *ngFor="let kind of kinds" [value]="kind.id">{{ kind.kind1 }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="width: 90%;">
+        <mat-label>Leírás</mat-label>
+        <textarea matInput [formControl]="description"></textarea>
+    </mat-form-field>
+
+    <section>
+        <mat-checkbox [formControl]="isMale">Hím</mat-checkbox>
+        <mat-checkbox [formControl]="isNeutered">Ivartalanítva</mat-checkbox>
+    </section>
+
+    <br/>
+    
+    <section>
+        <input type="file" (change)="onFileSelected($event)">
+    </section>
+    
+    <br/>
+
+    <button mat-raised-button (click)="onSaveAnimalClick()">Mentés</button>
+</div>
