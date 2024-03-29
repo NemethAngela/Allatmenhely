@@ -35,7 +35,7 @@ export class AnimalDetails {
         console.log(this.animal);
         const photoData = this.animal.photo;
 
-        if (photoData !== null && photoData !== undefined) {
+        if (photoData !== null && photoData !== undefined && photoData !== "") {
           if (photoData.startsWith("data:image/")) {
             this.photo = photoData;
           } else {

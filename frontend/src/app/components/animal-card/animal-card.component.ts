@@ -19,7 +19,7 @@ export class AnimalCardComponent {
   ngOnInit(): void {
     const photoData = this.animal.photo;
 
-    if (photoData !== null && photoData !== undefined) {
+    if (photoData !== null && photoData !== undefined && photoData !== "") {
       if (photoData.startsWith("data:image/")) {
         this.photo = photoData;
       } else {
