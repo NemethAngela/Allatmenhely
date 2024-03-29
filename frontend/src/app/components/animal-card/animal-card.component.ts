@@ -61,8 +61,7 @@ export class AnimalCardComponent {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
-      animal: this.animal,
-      kinds: this.kinds
+      animal: this.animal
     }
 
     const dialogRef = this.dialog.open(UpdateanimalComponent, dialogConfig);

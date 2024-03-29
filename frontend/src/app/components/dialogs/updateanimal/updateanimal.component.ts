@@ -23,16 +23,17 @@ export class UpdateanimalComponent {
     isMale = new FormControl(false);
     isNeutered = new FormControl(false);
     description = new FormControl('');
+    photo: string | null |undefined;
 
     constructor(
         private animalService: AnimalService,
         private kindService: KindService,
         private router: Router,
         private dialogRef: MatDialogRef<UpdateanimalComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: { animal: Animal },
-        
+        @Inject(MAT_DIALOG_DATA) public data: { animal: Animal }
     ) {
         this.animal = this.data.animal; 
+        this.photo = this.data.animal.photo;
         this.kindService.getAllKinds().subscribe(response => {
             this.kinds = response.kinds;
             console.log(this.kinds);
@@ -50,6 +51,7 @@ export class UpdateanimalComponent {
 
     onSaveAnimalClick() {
         if (this.name.valid && this.kindId.valid && this.age.valid) {
+            console.log("test: " + this.photo);
             this.convertImageToBase64().then(base64String => {
                 const updatedAnimal: Animal = {
                     id: this.animal.id,
@@ -59,10 +61,9 @@ export class UpdateanimalComponent {
                     isMale: this.isMale.value !== null ? this.isMale.value : false,
                     isNeutered: this.isNeutered.value !== null ? this.isNeutered.value : false,
                     description: this.description !== null ? this.description.value : "",
-                    photo: base64String
+                    photo: (base64String == null || base64String === undefined || base64String === '') ? this.photo : base64String
                 };
 
-                // Elküldjük az új állatot a szolgáltatásnak
                 this.animalService.updateAnimal(updatedAnimal).subscribe(
                     result => {
                         console.log('Állatinfó: ', updatedAnimal);
