@@ -28,4 +28,8 @@ export class AnimalService {
   createAnimal(newAnimal: Animal): Observable<BaseResponseModel> {    
     return this.http.post<BaseResponseModel>(this.apiUrl + 'CreateAnimal', newAnimal);    
   }
+
+  updateAnimal(animal: Animal): Observable<AnimalResponseModel>{
+    return this.http.put<AnimalResponseModel>(this.apiUrl + 'UpdateAnimal', animal);
+  }
 }

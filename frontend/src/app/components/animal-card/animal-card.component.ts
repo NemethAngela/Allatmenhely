@@ -1,7 +1,12 @@
 import { Component, Input  } from '@angular/core';
 import { Animal } from 'src/app/models/animal.model';
 import { AnimalDetails } from '../dialogs/animaldetails/animal.details';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { LoginResponseModel } from 'src/app/models/loginresponsemodel.model';
+import { LoginDialog } from '../dialogs/login/logindialog';
+import { AuthService } from 'src/app/services/auth.service';
+import { AnimalService } from 'src/app/services/animal.service';
+import { UpdateanimalComponent } from '../dialogs/updateanimal/updateanimal.component';
 
 @Component({
   selector: 'app-animal-card',
@@ -13,11 +18,19 @@ export class AnimalCardComponent {
   @Input()
   animal!: Animal;
   photo: string = '';
+  loggedInUser: LoginResponseModel | null | undefined;
   
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    private authService: AuthService
+    ) { }
 
   ngOnInit(): void {
     const photoData = this.animal.photo;
+    
+    this.authService.loggedInUser.subscribe((loginResponse) => {
+      this.loggedInUser = loginResponse;
+    });
 
     if (photoData !== null && photoData !== undefined) {
       if (photoData.startsWith("data:image/")) {
@@ -40,4 +53,20 @@ export class AnimalCardComponent {
     // Foglalás logikája
     console.log("Foglalom!");
   }
+
+  onUpdateAnimalClick() {
+    console.log("Módosítom!")
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      animal: this.animal
+    }
+
+    const dialogRef = this.dialog.open(UpdateanimalComponent, dialogConfig);
+  }
+
+  deleteAnimal() {
+    console.log("Törlöm!")
+  }
+
 }
