@@ -7,19 +7,78 @@
     <title>Állatmenhely</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+		header {
+			background-image: url(pet-sitting-dog-cat-puppy-dog-and-cat-ad41e0b8bab966e2315c9cc3dc39a55c.png);
+			background-size: 600px;
+			background-position: 380px bottom;
+			color: #fde2c5;
+			padding: 20px;
+			background-repeat: no-repeat;
+			/*background-color: #fde2c5;*/
+			border-bottom: #fde2c5 solid 2px;
+		}
+		header .navbar-brand {
+			font-weight: 1000; 
+			text-shadow: 2px 2px 4px rgba(0,0,0,1);
+			color: #ffa700 !important;
+			text-transform: uppercase; 
+			letter-spacing: 2px; 
+			font-size: 25px;
+		}
+		.bg-light {
+			background-color: transparent !important;
+		}	
+		body {
+			background-color: #fefff1;
+		}
+	
         .animal-card {
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
             margin: 10px;
             transition: all 0.3s;
+			background-color: #fde2c5;
         }
         .animal-card:hover {
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			background-color: #fdf2d5;
         }
 		.animal-card img {
 			max-width: 100%;
 			height: auto;
+		}
+		
+		.btn-primary {
+			color: #fff;
+			background-color: #c59843 !important;
+			border-color: #b58833 !important;
+		}
+		.btn-primary:hover {
+			color: #fff;
+			background-color: #a57823 !important;
+			border-color: #df9700 !important;
+		}
+		.btn-primary:active  {
+			color: #fff;
+			background-color: #c59843 !important;
+			border-color: #b58833 !important;
+		}
+		.btn-primary:disabled,
+		.btn-primary.is-disabled {
+			opacity: .5;
+		}
+		
+		a {
+			color: #b58833;
+		}
+		a:hover {
+			color: #a06318;
+		}
+		.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+			color: #fff;
+			background-color: #c59843;
+			border-color: #dee2e6 #dee2e6 #b58833;
 		}
     </style>
 </head>

@@ -1,20 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
 
-/* html, body { height: 100%; }
-body { 
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
-    margin: 0 auto;
-    background-color: #222; }
-
-.container {
-    max-width: 1800px; 
+header {
+    background-image: url('src/assets/headerbg.png');
+    background-size: 600px;
+    background-position: 380px bottom;
+    color: #fde2c5;
     padding: 20px;
-    background-color: gray; 
-  } */
+    background-repeat: no-repeat;
+    /*background-color: #fde2c5;*/
+    border-bottom: #fde2c5 solid 2px;
+}
+header .navbar-brand {
+    font-weight: 1000; 
+    text-shadow: 2px 2px 4px rgba(0,0,0,1);
+    color: #ffa700 !important;
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    font-size: 25px;
+}
+.bg-light {
+    background-color: transparent !important;
+}	
+body {
+    background-color: #fefff1 !important;
+}
 
 .animal-card {
     border: 1px solid #ccc;
@@ -22,16 +30,49 @@ body {
     padding: 10px;
     margin: 10px;
     transition: all 0.3s;
+    background-color: #fde2c5;
 }
 .animal-card:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #fdf2d5;
 }
 .animal-card img {
     max-width: 100%;
     height: auto;
 }
 
-.animal-details-card {
-    max-width: 400px;
-    margin-bottom: 8px;
+.btn-primary {
+    color: #fff;
+    background-color: #c59843 !important;
+    border-color: #b58833 !important;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #a57823 !important;
+    border-color: #df9700 !important;
+}
+.btn-primary:active  {
+    color: #fff;
+    background-color: #c59843 !important;
+    border-color: #b58833 !important;
+}
+.btn-primary:disabled,
+.btn-primary.is-disabled {
+    opacity: .5;
+}
+
+a {
+    color: #b58833 !important;
+}
+a:hover {
+    color: #a06318 !important;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #fff !important;
+    background-color: #c59843 !important;
+    border-color: #dee2e6 #dee2e6 #b58833 !important;
+}
+
+.navbar-expand-lg .navbar-nav {
+    margin-left: auto;
 }
