@@ -14,35 +14,50 @@ import { Kind } from 'src/app/models/kind.model';
     
 })
 export class UpdateanimalComponent {
-    animal: Animal[] = [];
+
+    
+    animal: Animal;
     kinds: Kind[] = [];
     selectedFile: File | null = null;
 
-    name = new FormControl(0, [Validators.required]);
+    name = new FormControl('', [Validators.required]);
     kindId = new FormControl(0, [Validators.required]);
     age = new FormControl(1, [Validators.required]);
     isMale = new FormControl(false);
     isNeutered = new FormControl(false);
-    description = new FormControl('test description');
+    description = new FormControl('');
 
     constructor(
         private animalService: AnimalService,
         private router: Router,
         private dialogRef: MatDialogRef<UpdateanimalComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: { kinds: Kind[] },
+        @Inject(MAT_DIALOG_DATA) public data: { animal: Animal, kinds: Kind[] },
         
     ) {
-        this.kinds = this.data.kinds; 
-    }
+        this.animal = this.data.animal; 
+        this.kinds = this.data.kinds;
 
-    ngOnInit(){
         
     }
 
+    // ngOnInit(): void{
+    //     console.log("Ez az állat: ", this.animal);
+    //     // this.fillData();     
+        
+    // }
+
+    // fillData(){
+    //     name: [this.animal.name, [Validators.required]]
+    //     age: [this.animal.age, [Validators.required]]
+    // }
+
     onSaveAnimalClick() {
+        console.log("Menteni fogom...");
+
         if (this.name.valid && this.kindId.valid && this.age.valid) {
             this.convertImageToBase64().then(base64String => {
-                const newAnimal: Animal = {
+                const updatedAnimal: Animal = {
+                    id: this.animal.id,
                     name: this.name.value !== null ? this.name.value : "",
                     kindId: this.kindId.value !== null && this.kindId.value !== undefined ? this.kindId.value : 0,
                     age: this.age.value !== null && this.age.value !== undefined ? this.age.value : 0,
@@ -53,14 +68,14 @@ export class UpdateanimalComponent {
                 };
 
                 // Elküldjük az új állatot a szolgáltatásnak
-                this.animalService.createAnimal(newAnimal).subscribe(
+                this.animalService.updateAnimal(updatedAnimal).subscribe(
                     result => {
-                        console.log('Állatinfó: ', newAnimal);
+                        console.log('Állatinfó: ', updatedAnimal);
                         this.dialogRef.close();
                     },
                     error => {
                         console.log('Mentési hiba!', error);
-                        console.log('Állatinfó: ', newAnimal);
+                        console.log('Állatinfó: ', updatedAnimal);
                     }
                 );
             });
@@ -72,6 +87,11 @@ export class UpdateanimalComponent {
     }
 
     private convertImageToBase64(): Promise<string> {
+        
+        // hibakeresés miatt...
+        console.log('Kép fájl: ', this.selectedFile);
+        // hibakeresés miatt...
+
         return new Promise((resolve, reject) => {
             if (this.selectedFile) {
                 const reader = new FileReader();
@@ -85,4 +105,5 @@ export class UpdateanimalComponent {
             }
         });
     }
+    
 }
