@@ -7,6 +7,7 @@ import { LoginDialog } from '../dialogs/login/logindialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { AnimalService } from 'src/app/services/animal.service';
 import { UpdateanimalComponent } from '../dialogs/updateanimal/updateanimal.component';
+import { Kind } from 'src/app/models/kind.model';
 
 @Component({
   selector: 'app-animal-card',
@@ -17,6 +18,7 @@ export class AnimalCardComponent {
   
   @Input()
   animal!: Animal;
+  kinds: Kind[] = [];
   photo: string = '';
   loggedInUser: LoginResponseModel | null | undefined;
   
@@ -59,7 +61,8 @@ export class AnimalCardComponent {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
-      animal: this.animal
+      animal: this.animal,
+      kinds: this.kinds
     }
 
     const dialogRef = this.dialog.open(UpdateanimalComponent, dialogConfig);

@@ -6,16 +6,13 @@ import { AnimalService } from 'src/app/services/animal.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Router } from '@angular/router';
 import { Kind } from 'src/app/models/kind.model';
-
+import { KindService } from 'src/app/services/kind.service';
 
 @Component({
     selector: 'app-updateanimal',
-    templateUrl: './updateanimal.component.html'   
-    
+    templateUrl: './updateanimal.component.html'      
 })
 export class UpdateanimalComponent {
-
-    
     animal: Animal;
     kinds: Kind[] = [];
     selectedFile: File | null = null;
@@ -29,31 +26,29 @@ export class UpdateanimalComponent {
 
     constructor(
         private animalService: AnimalService,
+        private kindService: KindService,
         private router: Router,
         private dialogRef: MatDialogRef<UpdateanimalComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: { animal: Animal, kinds: Kind[] },
+        @Inject(MAT_DIALOG_DATA) public data: { animal: Animal },
         
     ) {
         this.animal = this.data.animal; 
-        this.kinds = this.data.kinds;
-
-        
+        this.kindService.getAllKinds().subscribe(response => {
+            this.kinds = response.kinds;
+            console.log(this.kinds);
+        });
     }
 
-    // ngOnInit(): void{
-    //     console.log("Ez az állat: ", this.animal);
-    //     // this.fillData();     
-        
-    // }
-
-    // fillData(){
-    //     name: [this.animal.name, [Validators.required]]
-    //     age: [this.animal.age, [Validators.required]]
-    // }
+    ngOnInit(): void{
+        this.name.setValue(this.animal.name);
+        this.kindId.setValue(this.animal.kindId);
+        this.age.setValue(this.animal.age);
+        this.isMale.setValue(this.animal.isMale ?? false);
+        this.isNeutered.setValue(this.animal.isNeutered);
+        this.description.setValue(this.animal.description ?? '');
+    }
 
     onSaveAnimalClick() {
-        console.log("Menteni fogom...");
-
         if (this.name.valid && this.kindId.valid && this.age.valid) {
             this.convertImageToBase64().then(base64String => {
                 const updatedAnimal: Animal = {
@@ -87,11 +82,6 @@ export class UpdateanimalComponent {
     }
 
     private convertImageToBase64(): Promise<string> {
-        
-        // hibakeresés miatt...
-        console.log('Kép fájl: ', this.selectedFile);
-        // hibakeresés miatt...
-
         return new Promise((resolve, reject) => {
             if (this.selectedFile) {
                 const reader = new FileReader();
@@ -105,5 +95,4 @@ export class UpdateanimalComponent {
             }
         });
     }
-    
 }

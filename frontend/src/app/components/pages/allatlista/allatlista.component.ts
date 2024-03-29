@@ -36,7 +36,6 @@ export class AllatlistaComponent implements OnInit {
     });
     this.kindService.getAllKinds().subscribe(response => {
       this.kinds = response.kinds;
-      console.log(this.kinds);
     });
     console.log('Bejelentkezve: ', this.loggedInUser);
   }
@@ -80,5 +79,4 @@ export class AllatlistaComponent implements OnInit {
 
     const dialogRef = this.dialog.open(CreateanimalComponent, dialogConfig);
   }
-
 }

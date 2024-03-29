@@ -15,12 +15,12 @@ export class CreateanimalComponent {
     kinds: Kind[] = [];
     selectedFile: File | null = null;
 
-    name = new FormControl('test', [Validators.required]);
+    name = new FormControl('', [Validators.required]);
     kindId = new FormControl(0, [Validators.required]);
     age = new FormControl(1, [Validators.required]);
     isMale = new FormControl(false);
     isNeutered = new FormControl(false);
-    description = new FormControl('test description');
+    description = new FormControl('');
 
     constructor(
         private animalService: AnimalService,
