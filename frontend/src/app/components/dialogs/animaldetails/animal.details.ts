@@ -1,18 +1,12 @@
-import { MatCardModule } from '@angular/material/card';
 import { Component, Inject } from "@angular/core";
-import { FormControl, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Router } from '@angular/router';
-import { AdminService } from 'src/app/services/admin.service';
 import { AnimalService } from 'src/app/services/animal.service';
 import { Animal } from 'src/app/models/animal.model';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'animal.details',
-  templateUrl: 'animal.details.html',
-  standalone: true,
-  imports: [MatCardModule, CommonModule]
+  templateUrl: 'animal.details.html'
 })
 
 export class AnimalDetails {
@@ -49,10 +43,4 @@ export class AnimalDetails {
     onNoClick(): void {
         this.dialogRef.close();
     }
-
-    longText = `Ez egy nagyon aranyos kutyus, nyugodt, barátságos a gyerekekkel..
-        Ez egy nagyon aranyos kutyus, nyugodt, barátságos a gyerekekkel..
-        Ez egy nagyon aranyos kutyus, nyugodt, barátságos a gyerekekkel..
-        Ez egy nagyon aranyos kutyus, nyugodt, barátságos a gyerekekkel..
-        Ez egy nagyon aranyos kutyus, nyugodt, barátságos a gyerekekkel..`;
 }
