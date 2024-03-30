@@ -9,6 +9,7 @@ import { AnimalService } from 'src/app/services/animal.service';
 import { UpdateanimalComponent } from '../dialogs/updateanimal/updateanimal.component';
 import { Kind } from 'src/app/models/kind.model';
 import { DeleteanimalComponent } from '../dialogs/deleteanimal/deleteanimal.component';
+import { AllatlistaComponent } from '../pages/allatlista/allatlista.component';
 
 @Component({
   selector: 'app-animal-card',
@@ -19,6 +20,9 @@ export class AnimalCardComponent {
   
   @Input()
   animal!: Animal;
+  @Input()
+  animalListComponent!: AllatlistaComponent;
+
   kinds: Kind[] = [];
   photo: string = '';
   loggedInUser: LoginResponseModel | null | undefined;
@@ -58,20 +62,21 @@ export class AnimalCardComponent {
   }
 
   onUpdateAnimalClick() {
-    console.log("Módosítom!")
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
-      animal: this.animal
+      animal: this.animal,
+      animalListComponent: this.animalListComponent
     }
 
     const dialogRef = this.dialog.open(UpdateanimalComponent, dialogConfig);
   }
 
   deleteAnimal($event: MouseEvent): void {
-    console.log("Törlés dialógus megnyitása")
     const dialogRef = this.dialog.open(DeleteanimalComponent, {
-      data: { animal: this.animal },
+      data: { 
+        animal: this.animal,
+        animalListComponent: this.animalListComponent },
     });
   }
 

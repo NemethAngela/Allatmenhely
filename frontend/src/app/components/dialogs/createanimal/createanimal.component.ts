@@ -6,6 +6,7 @@ import { AnimalService } from 'src/app/services/animal.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Router } from '@angular/router';
 import { Kind } from 'src/app/models/kind.model';
+import { AllatlistaComponent } from '../../pages/allatlista/allatlista.component';
 
 @Component({
     selector: 'app-createanimal',
@@ -13,6 +14,7 @@ import { Kind } from 'src/app/models/kind.model';
 })
 export class CreateanimalComponent {
     kinds: Kind[] = [];
+    animalListComponent: AllatlistaComponent;
     selectedFile: File | null = null;
 
     name = new FormControl('', [Validators.required]);
@@ -26,9 +28,10 @@ export class CreateanimalComponent {
         private animalService: AnimalService,
         private router: Router,
         private dialogRef: MatDialogRef<CreateanimalComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: { kinds: Kind[] }
+        @Inject(MAT_DIALOG_DATA) public data: { kinds: Kind[], animalListComponent: AllatlistaComponent }
     ) {
-        this.kinds = this.data.kinds; 
+        this.kinds = this.data.kinds;
+        this.animalListComponent = this.data.animalListComponent;
     }
 
     onSaveAnimalClick() {
@@ -49,6 +52,7 @@ export class CreateanimalComponent {
                     result => {
                         console.log('Állatinfó: ', newAnimal);
                         this.dialogRef.close();
+                        this.animalListComponent.refreshAnimalList();
                     },
                     error => {
                         console.log('Mentési hiba!', error);
