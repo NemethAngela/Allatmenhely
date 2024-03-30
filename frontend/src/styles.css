@@ -87,3 +87,8 @@ a:hover {
 .mat-mdc-dialog-container .mdc-dialog__content {
     background-color: #fefff1 !important;
 }
+
+.mat-mdc-card-xl-image {
+    width: auto !important;
+    margin-left: 10px !important;
+}
