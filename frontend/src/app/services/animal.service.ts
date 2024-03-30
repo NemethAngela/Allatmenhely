@@ -11,8 +11,7 @@ import { BaseResponseModel } from '../models/baseresponsemodel.model';
   providedIn: 'root'
 })
 export class AnimalService {
-  private apiUrl = 'https://localhost:7120/Animal/'; 
-  // private apiUrl = 'http://localhost:41577/Animal/'; 
+  private apiUrl = 'https://localhost:7120/Animal/';  
   private interceptor: AuthInterceptor = new AuthInterceptor;
 
   constructor(private http: HttpClient) { }
@@ -25,11 +24,15 @@ export class AnimalService {
     return this.http.get<AnimalResponseModel>(this.apiUrl + 'GetAnimalById?id=' + id);
   }
 
-  createAnimal(newAnimal: Animal): Observable<BaseResponseModel> {    
-    return this.http.post<BaseResponseModel>(this.apiUrl + 'CreateAnimal', newAnimal);    
+  createAnimal(newAnimal: Animal): Observable<BaseResponseModel> {
+    return this.http.post<BaseResponseModel>(this.apiUrl + 'CreateAnimal', newAnimal);
   }
 
-  updateAnimal(animal: Animal): Observable<AnimalResponseModel>{
+  updateAnimal(animal: Animal): Observable<AnimalResponseModel> {
     return this.http.put<AnimalResponseModel>(this.apiUrl + 'UpdateAnimal', animal);
+  }
+
+  deleteAnimal(id: number): Observable<AnimalResponseModel> {
+    return this.http.delete<AnimalResponseModel>(this.apiUrl + 'DeleteAnimal?id=' + id);
   }
 }

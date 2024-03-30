@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AnimalService } from 'src/app/services/animal.service';
 import { UpdateanimalComponent } from '../dialogs/updateanimal/updateanimal.component';
 import { Kind } from 'src/app/models/kind.model';
+import { DeleteanimalComponent } from '../dialogs/deleteanimal/deleteanimal.component';
 
 @Component({
   selector: 'app-animal-card',
@@ -67,8 +68,11 @@ export class AnimalCardComponent {
     const dialogRef = this.dialog.open(UpdateanimalComponent, dialogConfig);
   }
 
-  deleteAnimal() {
-    console.log("Törlöm!")
+  deleteAnimal($event: MouseEvent): void {
+    console.log("Törlés dialógus megnyitása")
+    const dialogRef = this.dialog.open(DeleteanimalComponent, {
+      data: { animal: this.animal },
+    });
   }
 
 }
