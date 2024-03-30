@@ -7,6 +7,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Router } from '@angular/router';
 import { Kind } from 'src/app/models/kind.model';
 import { KindService } from 'src/app/services/kind.service';
+import { AllatlistaComponent } from '../../pages/allatlista/allatlista.component';
 
 @Component({
     selector: 'app-updateanimal',
@@ -14,6 +15,7 @@ import { KindService } from 'src/app/services/kind.service';
 })
 export class UpdateanimalComponent {
     animal: Animal;
+    animalListComponent: AllatlistaComponent;
     kinds: Kind[] = [];
     selectedFile: File | null = null;
 
@@ -30,9 +32,10 @@ export class UpdateanimalComponent {
         private kindService: KindService,
         private router: Router,
         private dialogRef: MatDialogRef<UpdateanimalComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: { animal: Animal }
+        @Inject(MAT_DIALOG_DATA) public data: { animal: Animal, animalListComponent: AllatlistaComponent }
     ) {
         this.animal = this.data.animal; 
+        this.animalListComponent = this.data.animalListComponent;
         this.photo = this.data.animal.photo;
         this.kindService.getAllKinds().subscribe(response => {
             this.kinds = response.kinds;
@@ -51,7 +54,6 @@ export class UpdateanimalComponent {
 
     onSaveAnimalClick() {
         if (this.name.valid && this.kindId.valid && this.age.valid) {
-            console.log("test: " + this.photo);
             this.convertImageToBase64().then(base64String => {
                 const updatedAnimal: Animal = {
                     id: this.animal.id,
@@ -61,13 +63,15 @@ export class UpdateanimalComponent {
                     isMale: this.isMale.value !== null ? this.isMale.value : false,
                     isNeutered: this.isNeutered.value !== null ? this.isNeutered.value : false,
                     description: this.description !== null ? this.description.value : "",
-                    photo: (base64String == null || base64String === undefined || base64String === '') ? this.photo : base64String
+                    photo: (base64String == null || base64String === undefined || base64String === '') ? this.photo : base64String,
+                    isActive: true
                 };
 
                 this.animalService.updateAnimal(updatedAnimal).subscribe(
                     result => {
                         console.log('Állatinfó: ', updatedAnimal);
                         this.dialogRef.close();
+                        this.animalListComponent.refreshAnimalList();
                     },
                     error => {
                         console.log('Mentési hiba!', error);

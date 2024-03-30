@@ -20,7 +20,12 @@ export class AllatlistaComponent implements OnInit {
 
   loggedInUser: LoginResponseModel | null | undefined;
   displayedColumns: string[] = ['id', 'name'];
-  animals: Animal[] = [];
+  animalDogs: Animal[] = [];
+  animalCats: Animal[] = [];
+  animalOthers: Animal[] = [];
+  dogKindId: number | undefined;
+  catKindId: number | undefined;
+  otherKindId: number | undefined;
   kinds: Kind[] = [];
   selectedKindId: number | undefined;
 
@@ -36,21 +41,24 @@ export class AllatlistaComponent implements OnInit {
     });
     this.kindService.getAllKinds().subscribe(response => {
       this.kinds = response.kinds;
+      this.dogKindId = this.kinds.find(kind => kind.kind1 === "Kutya")?.id;
+      this.catKindId = this.kinds.find(kind => kind.kind1 === "Macska")?.id;
+      this.otherKindId = this.kinds.find(kind => kind.kind1 === "Egyéb")?.id;
+      this.refreshAnimalList();
     });
     console.log('Bejelentkezve: ', this.loggedInUser);
   }
 
-  onKindSelected(selectedKind: string): void {
-    const selectedKindId = this.kinds.find(kind => kind.kind1 === selectedKind)?.id;
-
-    this.selectedKindId = selectedKindId ? selectedKindId : -1;
-
-    if (selectedKindId !== -1) {
-      this.animalService.getAnimalsByKindId(this.selectedKindId).subscribe(response => {
-        this.animals = response.animals;
-        console.log(this.animals);
-      });
-    }
+  refreshAnimalList(): void {
+    this.animalService.getAnimalsByKindId(this.dogKindId ?? -1).subscribe(response => {
+      this.animalDogs = response.animals;
+    });
+    this.animalService.getAnimalsByKindId(this.catKindId ?? -1).subscribe(response => {
+      this.animalCats = response.animals;
+    });
+    this.animalService.getAnimalsByKindId(this.otherKindId ?? -1).subscribe(response => {
+      this.animalOthers = response.animals;
+    });
   }
 
   onLoginClick($event: MouseEvent): void {
@@ -74,7 +82,8 @@ export class AllatlistaComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
-        kinds: this.kinds
+        kinds: this.kinds,
+        animalListComponent: this
     };
 
     const dialogRef = this.dialog.open(CreateanimalComponent, dialogConfig);

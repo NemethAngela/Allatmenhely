@@ -10,13 +10,7 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log("@@@@@ AuthInterceptor");
-    
-    
     const token = localStorage.getItem('loggedInUserToken');
-
-    console.log(token);
-
     if (token) {
       request = request.clone({
         setHeaders: {
