@@ -15,12 +15,13 @@
                   <ng-template #loggedIn>
                     
                     <div>
-                      Üdvözöllek {{ loggedInUser?.email ?? loggedInUser }} !
+                      <!-- Üdvözöllek {{ loggedInUser?.email ?? loggedInUser }} ! -->
+                      <button mat-raised-button (click)="onCreateAnimalClick()">Állat felvétele</button>
                       <button mat-raised-button (click)="onLogoutClick()">Kilépés</button>
                     </div>                  
                                         
                     <div>
-                      <button mat-raised-button (click)="onCreateAnimalClick()">Állat felvétele</button>
+                      
                     </div>
                     
                   </ng-template>

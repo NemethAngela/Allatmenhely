@@ -28,12 +28,14 @@ import { CreateanimalComponent } from './components/dialogs/createanimal/createa
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 import { UpdateanimalComponent } from './components/dialogs/updateanimal/updateanimal.component';
 import { DeleteanimalComponent } from './components/dialogs/deleteanimal/deleteanimal.component';
+import { AnimalDetails } from './components/dialogs/animaldetails/animal.details';
 
 @NgModule({
   declarations: [
     AllatlistaComponent,
     AnimalCardComponent,
     LoginDialog,
+    AnimalDetails,
     CreateanimalComponent,
     UpdateanimalComponent,
     DeleteanimalComponent
@@ -57,8 +59,6 @@ import { DeleteanimalComponent } from './components/dialogs/deleteanimal/deletea
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule
-
-
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

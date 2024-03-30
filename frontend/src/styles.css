@@ -1,9 +1,13 @@
+:root {
+    --dark-color: #a06318;
+    --title-text-color: #ffa700;
+}
 
 header {
     background-image: url('src/assets/headerbg.png');
     background-size: 600px;
     background-position: 380px bottom;
-    color: #fde2c5;
+    color: var(--dark-color);
     padding: 20px;
     background-repeat: no-repeat;
     /*background-color: #fde2c5;*/
@@ -12,7 +16,7 @@ header {
 header .navbar-brand {
     font-weight: 1000; 
     text-shadow: 2px 2px 4px rgba(0,0,0,1);
-    color: #ffa700 !important;
+    color: var(--title-text-color) !important;
     text-transform: uppercase; 
     letter-spacing: 2px; 
     font-size: 25px;
@@ -41,6 +45,9 @@ body {
     height: auto;
 }
 
+.btn, .mat-mdc-raised-button{
+	margin-right: 5px;
+}
 .btn-primary {
     color: #fff;
     background-color: #c59843 !important;
@@ -65,7 +72,7 @@ a {
     color: #b58833 !important;
 }
 a:hover {
-    color: #a06318 !important;
+    color: var(--dark-color) !important;
 }
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
     color: #fff !important;
@@ -75,4 +82,8 @@ a:hover {
 
 .navbar-expand-lg .navbar-nav {
     margin-left: auto;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__content {
+    background-color: #fefff1 !important;
 }
