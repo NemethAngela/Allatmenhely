@@ -26,7 +26,7 @@ namespace backend.Controllers
             {
                 AnimalsResponseModel response = new AnimalsResponseModel
                 {
-                    Animals = await _context.Animals.ToListAsync()
+                    Animals = await _context.Animals.Where(x => x.IsActive).ToListAsync()
                 };
 
                 return response;
@@ -76,14 +76,14 @@ namespace backend.Controllers
 
                     response = new AnimalsResponseModel
                     {
-                        Animals = await _context.Animals.Where(x => x.KindId != kutyaId && x.KindId != macskaId).ToListAsync()
+                        Animals = await _context.Animals.Where(x => x.KindId != kutyaId && x.KindId != macskaId && x.IsActive).ToListAsync()
                     };
                 }
                 else
                 {
                     response = new AnimalsResponseModel
                     {
-                        Animals = await _context.Animals.Where(x => x.KindId == kindId).ToListAsync()
+                        Animals = await _context.Animals.Where(x => x.KindId == kindId && x.IsActive).ToListAsync()
                     };
                 }
 
