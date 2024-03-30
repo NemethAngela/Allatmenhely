@@ -1,6 +1,15 @@
-<div class="animal-card" (click)="showDetails($event)">
-    <img [alt]="animal.name" [src]="photo">
+<div class="animal-card">
+    <img [alt]="animal.name" [src]="photo" (click)="showDetails($event)">
     <h3>{{ animal.name }} ({{ animal.age }} hónapos)</h3>
     <p class="long-text">Jellemzők: {{ animal.description }}</p>
-    <button class="btn btn-primary" (click)="reserve()">Foglalás</button>
+    
+    <div *ngIf="!loggedInUser; else loggedIn">
+        <button class="btn btn-primary" (click)="reserve()">Foglalás</button>
+    </div>
+    <ng-template #loggedIn>
+        <div>
+            <button class="btn btn-primary" (click)="onUpdateAnimalClick()">Módosítás</button>
+            <button class="btn btn-primary" (click)="deleteAnimal($event)">Törlés</button>
+        </div>
+    </ng-template>
 </div>

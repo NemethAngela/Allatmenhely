@@ -26,13 +26,17 @@ import { AnimalCardComponent } from './components/animal-card/animal-card.compon
 import { LoginDialog } from './components/dialogs/login/logindialog';
 import { CreateanimalComponent } from './components/dialogs/createanimal/createanimal.component';
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
+import { UpdateanimalComponent } from './components/dialogs/updateanimal/updateanimal.component';
+import { DeleteanimalComponent } from './components/dialogs/deleteanimal/deleteanimal.component';
 
 @NgModule({
   declarations: [
     AllatlistaComponent,
     AnimalCardComponent,
     LoginDialog,
-    CreateanimalComponent
+    CreateanimalComponent,
+    UpdateanimalComponent,
+    DeleteanimalComponent
   ],
   imports: [
     BrowserModule,
