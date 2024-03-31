@@ -16,43 +16,66 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
     selector: 'app-get-all-enqueries',
-    templateUrl: './getAllEnqueries.component.html'
+    templateUrl: './getAllEnqueries.component.html',
+    styleUrls: ['./getAllEnqueries.component.css']
 })
 
 export class GetAllEnqueriesComponent {
 
-    enqueries: Enquery[] = [];
+    // enqueries: Enquery[] = [];
 
     displayedColumns: string[] = ['id', 'timeStamp', 'phone', 'animalId', 'email'];
     listOfEnqueries: Enquery[] = [];
-    // dataSource = new MatTableDataSource(this.listOfEnqueries);
+    dataSource: any
 
-
-
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!: MatSort;
 
     constructor(
         private enqueryService: EnqueryService,
         private dialogRef: MatDialogRef<GetAllEnqueriesComponent>,
 
-    ) { }
-
-
-    ngOnInit(): void {
+    ) {
         this.enqueryService.getAllEnqueries().subscribe(response => {
             this.listOfEnqueries = response.enqueries;
-            
+            this.dataSource = new MatTableDataSource(this.listOfEnqueries);
+
             console.log('_debug_Foglalások listája: ', this.listOfEnqueries);
+            console.log('_debug_ dataSource: ', this.dataSource);
+
+            this.ngAfterViewInit();
         })
+
     }
 
-    // applyFilter(event: Event) {
-    //     const filterValue = (event.target as HTMLInputElement).value;
-    //     this.dataSource.filter = filterValue.trim().toLowerCase();
-    // }
+    // minta ez alapján: https://v16.material.angular.io/components/table/examples#table-overview
+
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
+        // ERROR TypeError: this.dataSource is undefined
+        console.log('_debug_dataSource_ngAfterViewInit: ', this.dataSource);
+    }
+
+    applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
+    }
+
+    onCancelClick($event: MouseEvent){
+        this.dialogRef.close();
+    }
+
 
 }
 
-
+// console.log('_debug_listOfEnqueries: ', this.listOfEnqueries);
+// console.log('_debug_dataSource: ', this.dataSource);
 
 
 

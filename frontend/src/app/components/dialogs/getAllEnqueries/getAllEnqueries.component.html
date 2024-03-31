@@ -1,45 +1,57 @@
-
 <div class="mat-elevation-z8">
-<table mat-table [dataSource]="listOfEnqueries" class="mat-elevation-z8">
+
+  <mat-form-field>
+    <mat-label>Szűrés</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Írjon ide a kereséshez" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
-  
+
     <!-- Jelentkezés ID oszlop -->
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <th mat-header-cell *matHeaderCellDef> Érdeklődés azonosító </th>
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
-  
+
     <!-- Timestamp oszlop -->
     <ng-container matColumnDef="timeStamp">
-      <th mat-header-cell *matHeaderCellDef> Time </th>
+      <th mat-header-cell *matHeaderCellDef> Érdeklődés kelte </th>
       <td mat-cell *matCellDef="let element"> {{element.timeStamp}} </td>
     </ng-container>
-  
+
     <!-- Telefonszám Oszlop -->
     <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef> Phone </th>
+      <th mat-header-cell *matHeaderCellDef> Telefonszám </th>
       <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
     </ng-container>
-  
+
     <!-- Állat ID Oszlop -->
     <ng-container matColumnDef="animalId">
-      <th mat-header-cell *matHeaderCellDef> animalId </th>
+      <th mat-header-cell *matHeaderCellDef> Állat </th>
       <td mat-cell *matCellDef="let element"> {{element.animalId}} </td>
     </ng-container>
 
     <!-- Email Oszlop -->
     <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-      </ng-container>
-  
+      <th mat-header-cell *matHeaderCellDef> Email cím </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Ha nincs találat -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Nincs találat erre: "{{input.value}}"</td>
+    </tr>
   </table>
-  
-  
-  
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+
+  </mat-paginator>
+
+  <button mat-raised-button (click)="onCancelClick($event)">Bezár</button>
 </div>
-  

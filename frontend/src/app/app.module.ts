@@ -30,6 +30,8 @@ import { UpdateanimalComponent } from './components/dialogs/updateanimal/updatea
 import { DeleteanimalComponent } from './components/dialogs/deleteanimal/deleteanimal.component';
 import { CreateEnqueryComponent } from './components/dialogs/createEnquery/createEnquery.component';
 import { GetAllEnqueriesComponent } from './components/dialogs/getAllEnqueries/getAllEnqueries.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { GetAllEnqueriesComponent } from './components/dialogs/getAllEnqueries/g
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatSortModule
 
 
   ],
