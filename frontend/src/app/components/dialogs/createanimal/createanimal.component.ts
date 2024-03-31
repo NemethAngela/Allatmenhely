@@ -81,4 +81,9 @@ export class CreateanimalComponent {
             }
         });
     }
+
+    onCancelClick($event: MouseEvent){
+        this.dialogRef.close();
+    }
+
 }

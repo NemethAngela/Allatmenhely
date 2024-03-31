@@ -4,7 +4,7 @@
     <p class="long-text">Jellemzők: {{ animal.description }}</p>
     
     <div *ngIf="!loggedInUser; else loggedIn">
-        <button class="btn btn-primary" (click)="reserve()">Foglalás</button>
+        <button class="btn btn-primary" (click)="onCreateEnqueryClick()">Gazdája szeretnék lenni</button>
     </div>
     <ng-template #loggedIn>
         <div>

@@ -28,6 +28,8 @@ import { CreateanimalComponent } from './components/dialogs/createanimal/createa
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 import { UpdateanimalComponent } from './components/dialogs/updateanimal/updateanimal.component';
 import { DeleteanimalComponent } from './components/dialogs/deleteanimal/deleteanimal.component';
+import { CreateEnqueryComponent } from './components/dialogs/createEnquery/createEnquery.component';
+import { GetAllEnqueriesComponent } from './components/dialogs/getAllEnqueries/getAllEnqueries.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { DeleteanimalComponent } from './components/dialogs/deleteanimal/deletea
     LoginDialog,
     CreateanimalComponent,
     UpdateanimalComponent,
-    DeleteanimalComponent
+    DeleteanimalComponent,
+    CreateEnqueryComponent,
+    GetAllEnqueriesComponent
   ],
   imports: [
     BrowserModule,

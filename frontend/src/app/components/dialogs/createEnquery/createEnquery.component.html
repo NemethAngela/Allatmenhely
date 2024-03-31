@@ -1,0 +1,22 @@
+
+<div mat-dialog-content>
+    <h1 mat-dialoge-title>Érdeklődés rögzítése</h1>
+
+    <mat-form-field style="width: 90%;">
+        <mat-label>Telefonszám</mat-label>
+        <input matInput [formControl]="phone" placeholder="nn-nnn-nnnn">
+        <mat-error *ngIf="phone.hasError('pattern')">A telefonszám nem megfelelő</mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="width: 90%;">
+        <mat-label>Email cím</mat-label>
+        <input matInput [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>     
+    
+    <img mat-card-xl-image [src]="photo">
+    <br/>
+
+    <button mat-raised-button (click)="onSaveEqueryClick($event)">Elküld</button>
+    <button mat-raised-button (click)="onCancelClick($event)">Mégsem</button>
+</div>
