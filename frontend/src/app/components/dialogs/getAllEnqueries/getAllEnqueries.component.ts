@@ -6,7 +6,6 @@ import { Animal } from 'src/app/models/animal.model';
 import { Enquery } from 'src/app/models/enquery.model';
 import { EnqueryService } from 'src/app/services/enquery.service';
 import { EnqueriesResponseModel } from 'src/app/models/enqueriesresponsemodel.model'
-
 import { AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -16,15 +15,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
     selector: 'app-get-all-enqueries',
-    templateUrl: './getAllEnqueries.component.html',
-    styleUrls: ['./getAllEnqueries.component.css']
+    templateUrl: './getAllEnqueries.component.html'
 })
 
 export class GetAllEnqueriesComponent {
 
     // enqueries: Enquery[] = [];
 
-    displayedColumns: string[] = ['id', 'timeStamp', 'phone', 'animalId', 'email'];
+    displayedColumns: string[] = ['name', 'timeStamp', 'phone', 'animalId', 'email'];
     listOfEnqueries: Enquery[] = [];
     dataSource: any
 
@@ -34,9 +32,11 @@ export class GetAllEnqueriesComponent {
     constructor(
         private enqueryService: EnqueryService,
         private dialogRef: MatDialogRef<GetAllEnqueriesComponent>,
-
     ) {
         this.enqueryService.getAllEnqueries().subscribe(response => {
+
+            console.log("@@@@@@@ " + JSON.stringify(response.enqueries));
+
             this.listOfEnqueries = response.enqueries;
             this.dataSource = new MatTableDataSource(this.listOfEnqueries);
 

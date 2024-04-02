@@ -9,7 +9,6 @@ import { BaseResponseModel } from '../models/baseresponsemodel.model';
 import { Enquery } from '../models/enquery.model';
 import { EnqueriesResponseModel } from '../models/enqueriesresponsemodel.model';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +16,6 @@ export class EnqueryService {
   private apiUrl = 'https://localhost:7120/Enquery/';
 
   constructor(private http: HttpClient) { }
-
 
   createEnquery(newEnquery: Enquery): Observable<BaseResponseModel>{
     return this.http.post<BaseResponseModel>(this.apiUrl + 'CreateEnquery', newEnquery);

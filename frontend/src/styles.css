@@ -92,3 +92,21 @@ a:hover {
     width: auto !important;
     margin-left: 10px !important;
 }
+
+
+table {
+    width: 100%;
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }
+
+.no-scroll {
+    overflow: hidden !important;
+}
