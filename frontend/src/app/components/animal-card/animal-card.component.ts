@@ -10,6 +10,7 @@ import { UpdateanimalComponent } from '../dialogs/updateanimal/updateanimal.comp
 import { Kind } from 'src/app/models/kind.model';
 import { DeleteanimalComponent } from '../dialogs/deleteanimal/deleteanimal.component';
 import { AllatlistaComponent } from '../pages/allatlista/allatlista.component';
+import { CreateEnqueryComponent } from '../dialogs/createEnquery/createEnquery.component';
 
 @Component({
   selector: 'app-animal-card',
@@ -56,9 +57,15 @@ export class AnimalCardComponent {
     });
   }
 
-  reserve() {
-    // Foglalás logikája
-    console.log("Foglalom!");
+  onCreateEnqueryClick(): void {
+    console.log("Foglalom!")
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+        animal: this.animal
+    };
+
+    const dialogRef = this.dialog.open(CreateEnqueryComponent, dialogConfig);
   }
 
   onUpdateAnimalClick() {

@@ -28,6 +28,10 @@ import { CreateanimalComponent } from './components/dialogs/createanimal/createa
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 import { UpdateanimalComponent } from './components/dialogs/updateanimal/updateanimal.component';
 import { DeleteanimalComponent } from './components/dialogs/deleteanimal/deleteanimal.component';
+import { CreateEnqueryComponent } from './components/dialogs/createEnquery/createEnquery.component';
+import { GetAllEnqueriesComponent } from './components/dialogs/getAllEnqueries/getAllEnqueries.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { AnimalDetails } from './components/dialogs/animaldetails/animal.details';
 
 @NgModule({
@@ -38,7 +42,9 @@ import { AnimalDetails } from './components/dialogs/animaldetails/animal.details
     AnimalDetails,
     CreateanimalComponent,
     UpdateanimalComponent,
-    DeleteanimalComponent
+    DeleteanimalComponent,
+    CreateEnqueryComponent,
+    GetAllEnqueriesComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +64,9 @@ import { AnimalDetails } from './components/dialogs/animaldetails/animal.details
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

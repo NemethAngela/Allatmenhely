@@ -10,6 +10,7 @@ import { LoginDialog } from '../../dialogs/login/logindialog';
 import { LoginResponseModel } from 'src/app/models/loginresponsemodel.model';
 import { AnimalDetails } from '../../dialogs/animaldetails/animal.details';
 import { CreateanimalComponent } from '../../dialogs/createanimal/createanimal.component';
+import { GetAllEnqueriesComponent } from '../../dialogs/getAllEnqueries/getAllEnqueries.component';
 
 @Component({
   selector: 'app-root',
@@ -88,4 +89,11 @@ export class AllatlistaComponent implements OnInit {
 
     const dialogRef = this.dialog.open(CreateanimalComponent, dialogConfig);
   }
+
+  onlistOfEnqueries(){
+    const dialogConfig = new MatDialogConfig();
+    const dialogRef = this.dialog.open(GetAllEnqueriesComponent, dialogConfig);
+  }
 }
+
+
