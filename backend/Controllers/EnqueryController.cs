@@ -25,7 +25,7 @@ namespace backend.Controllers
             {
                 EnqueriesResponseModel response = new EnqueriesResponseModel
                 {
-                    Enqueries = await _context.Enqueries.ToListAsync()
+                    Enqueries = await _context.Enqueries.Include(x => x.Animal).ToListAsync()
                 };
 
                 return response;
@@ -44,7 +44,7 @@ namespace backend.Controllers
             {
                 EnqueriesResponseModel response = new EnqueriesResponseModel
                 {
-                    Enqueries = await _context.Enqueries.Where(x => x.AnimalId == animalId).ToListAsync()
+                    Enqueries = await _context.Enqueries.Include(x => x.Animal).Where(x => x.Animal.Id == animalId).ToListAsync()
                 };
 
                 return response;
