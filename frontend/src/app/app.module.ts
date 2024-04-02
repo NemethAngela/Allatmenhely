@@ -32,12 +32,14 @@ import { CreateEnqueryComponent } from './components/dialogs/createEnquery/creat
 import { GetAllEnqueriesComponent } from './components/dialogs/getAllEnqueries/getAllEnqueries.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { AnimalDetails } from './components/dialogs/animaldetails/animal.details';
 
 @NgModule({
   declarations: [
     AllatlistaComponent,
     AnimalCardComponent,
     LoginDialog,
+    AnimalDetails,
     CreateanimalComponent,
     UpdateanimalComponent,
     DeleteanimalComponent,
@@ -65,8 +67,6 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
     MatCheckboxModule,
     MatPaginatorModule,
     MatSortModule
-
-
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
