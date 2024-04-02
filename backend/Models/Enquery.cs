@@ -9,6 +9,6 @@ namespace backend.Models
         public int AnimalId { get; set; }
         public string Email { get; set; } = null!;
 
-        public virtual Animal Animal { get; set; } = null!;
+        public virtual Animal? Animal { get; set; } = null!;
     }
 }
