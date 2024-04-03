@@ -85,7 +85,7 @@ a:hover {
 }
 
 .mat-mdc-dialog-container .mdc-dialog__content {
-    background-color: #fefff1 !important;
+    background-color: #fefff1 !important;   
 }
 
 .mat-mdc-card-xl-image {
@@ -104,11 +104,11 @@ table {
   }
   
   td, th {
-    width: 25%;
+    width: auto;
   }
 
 .no-scroll {
-    overflow: hidden !important;
+    overflow: hidden !important;    
 }
 
 .about-p {
