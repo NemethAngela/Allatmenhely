@@ -31,8 +31,11 @@
 
 <div class="container">
   <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">Rólunk</a>
+    </li>
       <li class="nav-item">
-          <a class="nav-link active" id="dogs-tab" data-toggle="tab" href="#dogs" role="tab" aria-controls="dogs" aria-selected="true">Kutyák</a>
+          <a class="nav-link" id="dogs-tab" data-toggle="tab" href="#dogs" role="tab" aria-controls="dogs" aria-selected="false">Kutyák</a>
       </li>
       <li class="nav-item">
           <a class="nav-link" id="cats-tab" data-toggle="tab" href="#cats" role="tab" aria-controls="cats" aria-selected="false">Macskák</a>
@@ -42,7 +45,49 @@
       </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="dogs" role="tabpanel" aria-labelledby="dogs-tab">
+    <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+      <div class="row" style="margin-top: 10px;">
+          <div class="col-md-9" style="text-align: justify;">
+            <h1>Állatotthonunk működéséről</h1>
+            <p class="about-p">Állatotthonunk 2009-ben nyitotta meg kapuit Dabas és térsége első menhelyeként, adományozó állatbarátok jóvoltából. A tanyán megfelelő helyet alakítottunk ki kutyáknak, macskáknak és egyéb, különlegesebb bánásmódot igánylő állatfajtáknak.</p>
+            <p class="about-p">Küldetésünknek tekintjük, hogy a hozzánk kerülő állatok szerető otthonra, befogadó gazdára leljenek. Hisszük, hogy minden állatnak joga van az élethez, a rendszeres napi mozgásra, így a hét minden napján, a kenneléhez tartozó úgynevezett "futtatóudvarban" történő 1-3 órás szabad mozgást, futkározást, ásást biztosítjuk nekik.</p>
+            <p class="about-p">Tudjuk, hogy az örökbefogadás komoly döntés: egy életről döntesz, ezért ha úgy érzed, hogy segítségre van szükséged, keress fel bennünket elérhetőségenk valamelyikén, szívesen állunk rendelkezésedre, és ha a képek alapján kiválasztottad leendő társadat, gyere el személyesen is hozzánk, hogy megismerkedjetek. Előtte azonban ne felejtsd el jelezni ezt az igényedet a "Gazdája szeretnék lenni" gomb megnyomásával!</p>
+            <p class="about-p">Évente átlagosan 250-300 állatot sikerül gazdához juttatnunk, munkánkat különféle rendezvényeken való megjelenésünkkel, nyílt napok tartásával próbáljuk minél ismertebbé tenni. Az ivartalanítást (elsősorban szuka kutyákat) anyagi helyzetünkhöz mérten, valamint civil támogatással próbáljuk megoldani.<br/>Amennyiben támogatni szeretnéd az állatotthont, úgy szívesen fogadunk adományokat a következő számon: Adószám: 19816016-1-43</p>
+            
+          </div>
+          <div class="col-md-3">
+            <h1>Elérhetőségeink</h1>
+            <div class="polaroid">
+              <img src="../../assets/map.png" alt="Térkép" style="width: -webkit-fill-available;">
+              <div class="container">
+                <p style="text-align: left; margin: 0 0 0 10px;"><b>Cím</b>: 2373 Dabas, Beton út 20.<br/>
+                <b>Telefon</b>: +36-20/9969111<br/>
+                <b>E-mail</b>: info@mazli.hu</p>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-md-3" style="text-align: justify;">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro laudantium tempore nulla ratione dolor error minus, ipsum ipsam, itaque harum soluta aperiam consequuntur nam fugit! Dolore non harum aliquam neque.
+        
+        </div>
+        <div class="col-md-9" style="text-align: justify;">
+
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro laudantium tempore nulla ratione dolor error minus, ipsum ipsam, itaque harum soluta aperiam consequuntur nam fugit! Dolore non harum aliquam neque.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro laudantium tempore nulla ratione dolor error minus, ipsum ipsam, itaque harum soluta aperiam consequuntur nam fugit! Dolore non harum aliquam neque.
+          Lorem ipsum dolor sit amet consectetur adipisicing eit. Porro laudantium tempore nulla ratione dolor error minus, ipsum ipsam, itaque harum soluta aperiam consequuntur nam fugit! Dolore non harum aliquam neque.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro laudantium tempore nulla ratione dolor error minus, ipsum ipsam, itaque harum soluta aperiam consequuntur nam fugit! Dolore non harum aliquam neque.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro laudantium tempore nulla ratione dolor error minus, ipsum ipsam, itaque harum soluta aperiam consequuntur nam fugit! Dolore non harum aliquam neque.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro laudantium tempore nulla ratione dolor error minus, ipsum ipsam, itaque harum soluta aperiam consequuntur nam fugit! Dolore non harum aliquam neque.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro laudantium tempore nulla ratione dolor error minus, ipsum ipsam, itaque harum soluta aperiam consequuntur nam fugit! Dolore non harum aliquam neque.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro laudantium tempore nulla ratione dolor error minus, ipsum ipsam, itaque harum soluta aperiam consequuntur nam fugit! Dolore non harum aliquam neque.
+        
+        </div>
+
+    </div>
+   </div>
+      <div class="tab-pane fade" id="dogs" role="tabpanel" aria-labelledby="dogs-tab">
           <div class="row">
               <div class="col-md-4" *ngFor="let animal of animalDogs">
                 <app-animal-card [animal]="animal" [animalListComponent]="this"></app-animal-card>
