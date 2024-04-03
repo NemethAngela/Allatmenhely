@@ -120,8 +120,12 @@ div.polaroid {
     text-align: center;
     background-color: #fff;
     padding: 5px;
-  }
-  
-  div.container {
+}
+
+div.container {
     padding: 10px;
-  }
+}
+
+/* .mat-mdc-form-field-subscript-wrapper {
+    height: 0px;
+}   */

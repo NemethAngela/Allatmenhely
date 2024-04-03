@@ -1,6 +1,49 @@
-<div class="animal-card">
+<mat-card class="example-card animal-card">
+    <mat-card-header  (click)="showDetails($event)">
+      <mat-card-title-group>
+        <mat-card-title>{{ animal.name }}</mat-card-title>
+        <mat-card-subtitle>
+            {{ animal.age }} hónapos<br/>
+            <ng-container *ngIf="animal.isMale">
+                <img mat-card-xl-image style="width: 20px; height:20px;" [src]=maleIcon>
+            </ng-container>
+            <ng-container *ngIf="!animal.isMale">
+                <img mat-card-xl-image style="width: 20px; height:20px;" [src]=femaleIcon>
+            </ng-container>
+            <ng-container *ngIf="animal.isNeutered">
+                Ivartalanított
+            </ng-container>
+        </mat-card-subtitle>
+        <img mat-card-xl-image [src]="photo">
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+        <p class="long-text"><br/>{{ animal.description }}</p>
+        <div *ngIf="!loggedInUser; else loggedIn">
+            <button class="btn btn-primary" (click)="onCreateEnqueryClick()">Gazdája szeretnék lenni</button>
+        </div>
+        <ng-template #loggedIn>
+            <div>
+                <button class="btn btn-primary" (click)="onUpdateAnimalClick()">Módosítás</button>
+                <button class="btn btn-primary" (click)="deleteAnimal($event)">Törlés</button>
+            </div>
+        </ng-template>
+    </mat-card-content>
+  </mat-card>
+
+<!-- <div class="animal-card">
     <img [alt]="animal.name" [src]="photo" (click)="showDetails($event)">
     <h3>{{ animal.name }} ({{ animal.age }} hónapos)</h3>
+    <ng-container *ngIf="animal.isMale">
+        <img mat-card-xl-image style="width: 20px; height:20px;" [src]=maleIcon>
+    </ng-container>
+    <ng-container *ngIf="!animal.isMale">
+        <img mat-card-xl-image style="width: 20px; height:20px;" [src]=femaleIcon>
+    </ng-container>
+    <ng-container *ngIf="animal.isNeutered">
+        Ivartalanított
+    </ng-container>
+
     <p class="long-text">Jellemzők: {{ animal.description }}</p>
     
     <div *ngIf="!loggedInUser; else loggedIn">
@@ -12,4 +55,4 @@
             <button class="btn btn-primary" (click)="deleteAnimal($event)">Törlés</button>
         </div>
     </ng-template>
-</div>
+</div> -->

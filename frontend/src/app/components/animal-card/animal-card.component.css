@@ -9,7 +9,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 .animal-card img {
-    max-width: 100%;
+    max-width: 70%;
     height: auto;
 }
 

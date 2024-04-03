@@ -71,12 +71,4 @@ export class GetAllEnqueriesComponent implements AfterViewInit {
     onCancelClick($event: MouseEvent) {
         this.dialogRef.close();
     }
-
-
 }
-
-// console.log('_debug_listOfEnqueries: ', this.listOfEnqueries);
-// console.log('_debug_dataSource: ', this.dataSource);
-
-
-
