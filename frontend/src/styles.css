@@ -128,7 +128,8 @@ div.container {
 
 
 .footer {
-    position: absolute;
+    position: relative;
+    margin-top: 10px;
     bottom: 0;
     left: 0;
     width: 100%;  /* Optional: Set footer width to 100% */
